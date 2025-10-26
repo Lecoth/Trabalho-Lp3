@@ -1,0 +1,44 @@
+package controller;
+
+import model.Conexao;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+public class CadastroController {
+    @FXML
+    private TextField txtNome, txtEmail;
+    @FXML
+    private PasswordField txtSenha;
+    @FXML
+    private Label lblMensagem;
+
+    public void cadastrar(ActionEvent event) {
+        String nome = txtNome.getText();
+        String email = txtEmail.getText();
+        String senha = txtSenha.getText();
+
+        try (Connection conn = Conexao.conectar()) {
+            String sql = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, nome);
+            stmt.setString(2, email);
+            stmt.setString(3, senha);
+            stmt.executeUpdate();
+
+            lblMensagem.setText("Usuário cadastrado com sucesso!");
+        } catch (Exception e) {
+            lblMensagem.setText("Erro: " + e.getMessage());
+        }
+    }
+
+    public void voltar(ActionEvent event) throws Exception {
+        javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        javafx.scene.Scene scene = new javafx.scene.Scene(loader.load());
+        javafx.stage.Stage stage = (javafx.stage.Stage) txtNome.getScene().getWindow();
+        stage.setScene(scene);
+    }
+}
