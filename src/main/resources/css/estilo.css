@@ -1,7 +1,7 @@
-.titulo {
+/*.titulo {
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-}
+} Não gostei de como ficou então usei o scene builder, vou deixar porque talvez mais tarde eu use*/
 
 .button {
     -fx-background-color: #007bff;
@@ -15,4 +15,12 @@
 
 .header-background {
     -fx-background-color: #2A4B7C
+}
+
+.login-background {
+    -fx-background-image: url("../images/fundoinicial.jpg");
+
+    -fx-background-size: cover;
+
+    -fx-background-position: center center;
 }
