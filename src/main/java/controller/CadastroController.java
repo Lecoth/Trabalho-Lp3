@@ -38,9 +38,19 @@ public class CadastroController {
             stmt.executeUpdate();
 
             lblMensagem.setText("Usuário cadastrado com sucesso!");
+            abrirTelaPrincipal();
         } catch (Exception e) {
             lblMensagem.setText("Erro: " + e.getMessage());
         }
+    }
+
+    private void abrirTelaPrincipal() throws java.io.IOException {
+        javafx.fxml.FXMLLoader fxmlLoader = new javafx.fxml.FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        javafx.scene.Scene scene = new javafx.scene.Scene(fxmlLoader.load());
+
+        javafx.stage.Stage stage = (javafx.stage.Stage) txtNome.getScene().getWindow();
+
+        stage.setScene(scene);
     }
 
     public void voltar(ActionEvent event) throws Exception {

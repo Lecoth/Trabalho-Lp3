@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" prefWidth="600" prefHeight="400">
+    <children>
+        <Label text="Tela de Minhas Builds" layoutX="200" layoutY="180" style="-fx-font-size: 18px;"/>
+    </children>
+</AnchorPane>
+

@@ -3,16 +3,6 @@
     -fx-font-weight: bold;
 } Não gostei de como ficou então usei o scene builder, vou deixar porque talvez mais tarde eu use*/
 
-.button {
-    -fx-background-color: #007bff;
-    -fx-text-fill: white;
-    -fx-background-radius: 8;
-}
-
-.button:hover {
-    -fx-background-color: #339dff;
-}
-
 .header-background {
     -fx-background-color: #2A4B7C
 }
@@ -23,4 +13,71 @@
     -fx-background-size: cover;
 
     -fx-background-position: center center;
+}
+
+/* Define a cor de fundo de todo o VBox do menu lateral */
+.menu-lateral {
+    -fx-background-color: #F5F5F5;
+}
+
+/* Remove os fundos e bordas feias do Accordion */
+.accordion > .titled-pane {
+    -fx-background-color: transparent;
+}
+
+/* Tirando a caixa feia*/
+.accordion > .titled-pane > .content {
+    -fx-background-color: transparent; /* Tira o fundo da caixa */
+    -fx-border-color: transparent;
+    -fx-padding: 0; /* Remove espaçamentos internos */
+}
+
+/* Botões do menu */
+
+.menu-button {
+    /* Faz o botão ocupar a largura toda do VBox */
+    -fx-pref-width: 1000; /* Truque para forçar a largura máxima */
+
+    /* Remove o fundo e bordas padrão */
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+
+    /* Alinha o texto à esquerda */
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 15;
+
+    /* Cor do texto */
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+}
+
+.menu-button:hover {
+    /* Efeito ao passar o mouse */
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+}
+
+/*
+ * Botões das telas de Login e Cadastro
+ *
+ * Usei .button.login-button para
+ * vencer o estilo padrão do JavaFX.
+ */
+.button.login-button {
+    /* Remove o fundo e a borda */
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0; /* Garante que não tenha borda arredondada */
+
+    -fx-text-fill: #007bff;
+
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.button.login-button:hover {
+    -fx-text-fill: #339dff;
+
+    -fx-underline: true;
 }

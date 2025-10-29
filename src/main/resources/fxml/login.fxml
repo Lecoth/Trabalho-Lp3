@@ -7,6 +7,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -14,24 +16,8 @@
 
 <AnchorPane prefHeight="349.0" prefWidth="396.0" styleClass="login-background" stylesheets="@../css/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
     <children>
-        <Label layoutX="176.0" layoutY="97.0" styleClass="titulo" text="Login" textFill="#061339d1">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font></Label>
-        <Label layoutX="56.0" layoutY="141.0" text="Email:">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font></Label>
-        <TextField fx:id="txtEmail" layoutX="117.0" layoutY="137.0" prefWidth="180" />
-        <Label layoutX="56.0" layoutY="191.0" text="Senha:">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font></Label>
-        <PasswordField fx:id="txtSenha" layoutX="117.0" layoutY="191.0" prefWidth="180" />
-        <Button layoutX="120.0" layoutY="246.0" onAction="#entrar" text="Entrar" />
-        <Button layoutX="219.0" layoutY="246.0" onAction="#abrirCadastro" text="Cadastrar" />
         <Label fx:id="lblMensagem" layoutX="120" layoutY="220" textFill="red" />
-      <AnchorPane layoutX="-1.0" layoutY="-2.0" prefHeight="83.0" prefWidth="408.0" style="-fx-background-color: #2A4B7C;" styleClass="header-background">
+      <AnchorPane layoutX="-1.0" layoutY="-2.0" prefHeight="83.0" style="-fx-background-color: #2A4B7C;" styleClass="header-background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <Label layoutX="73.0" layoutY="16.0" prefHeight="52.0" prefWidth="238.0" text="Genshin Build">
                <font>
@@ -61,6 +47,33 @@
             <Image url="@../images/logo.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutY="325.0" prefHeight="26.0" prefWidth="407.0" style="-fx-background-color: #2A4B7C;" styleClass="header-background" />
+      <AnchorPane prefHeight="26.0" style="-fx-background-color: #2A4B7C;" styleClass="header-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <StackPane layoutY="6.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
+         <children>
+            <VBox alignment="CENTER_LEFT" maxWidth="350.0" prefHeight="200.0" prefWidth="280.0" spacing="7.0">
+               <children>
+                    <Label styleClass="titulo" text="Login" textFill="#061339d1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                    <Label text="Email:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                    <TextField fx:id="txtEmail" maxWidth="300.0" prefHeight="26.0" prefWidth="173.0" />
+                    <Label text="Senha:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                    <PasswordField fx:id="txtSenha" maxWidth="300.0" prefHeight="19.0" prefWidth="228.0" />
+                    <Button onAction="#entrar" styleClass="login-button" text="Entrar" />
+                    <Button onAction="#abrirCadastro" styleClass="login-button" stylesheets="@../css/estilo.css" text="Cadastrar" />
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
     </children>
 </AnchorPane>
