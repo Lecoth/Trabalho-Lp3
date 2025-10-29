@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="350" prefWidth="400" styleClass="login-background" stylesheets="@../css/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastroController">
     <children>
-        <Label layoutX="149.0" layoutY="94.0" styleClass="titulo" text="Cadastro" textFill="#ffab19">
+        <Label layoutX="163.0" layoutY="94.0" styleClass="titulo" text="Cadastro" textFill="#0b2072">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>

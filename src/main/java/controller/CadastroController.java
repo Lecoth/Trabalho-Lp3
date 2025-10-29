@@ -21,6 +21,14 @@ public class CadastroController {
         String email = txtEmail.getText();
         String senha = txtSenha.getText();
 
+        //correção de erro da possibilidade de não preencher todos os campos
+        if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+            lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
+            lblMensagem.setText("Erro: Todos os campos são obrigatórios!");
+
+            return;
+        }
+
         try (Connection conn = Conexao.conectar()) {
             String sql = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);

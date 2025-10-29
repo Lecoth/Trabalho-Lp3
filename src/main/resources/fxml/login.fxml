@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="349.0" prefWidth="396.0" styleClass="login-background" stylesheets="@../css/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
     <children>
-        <Label layoutX="176.0" layoutY="97.0" styleClass="titulo" text="Login" textFill="#ffab19">
+        <Label layoutX="176.0" layoutY="97.0" styleClass="titulo" text="Login" textFill="#061339d1">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
