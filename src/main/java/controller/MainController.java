@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
@@ -19,8 +20,43 @@ public class MainController {
     private TextField txtPesquisa;
 
     @FXML
+    private VBox menuLateral;
+
+    @FXML
     public void initialize() throws IOException {
         carregarTela("home.fxml"); // Tela inicial padrão
+    }
+    @FXML
+    private void toggleMenu(ActionEvent event) {
+        // Pega o estado atual
+        boolean isVisible = menuLateral.isVisible();
+
+        // Inverte se está visível ou não
+        menuLateral.setVisible(!isVisible);
+        menuLateral.setManaged(!isVisible);
+    }
+
+    @FXML
+    private void pesquisarPersonagem(KeyEvent event) throws IOException {
+        if (event.getCode().toString().equals("ENTER")) {
+            fazerPesquisa(); // Chama o novo método
+        }
+    }
+
+    @FXML
+    private void iniciarPesquisaClick(ActionEvent event) throws IOException {
+        fazerPesquisa(); // O botão também chama o método
+    }
+
+    // Método da pesquis
+    private void fazerPesquisa() throws IOException {
+        String termo = txtPesquisa.getText();
+        System.out.println("Pesquisando: " + termo);
+
+        // Coisas que tenho que fazer aqui depois:
+        // 1. Chamar o banco de dados com o "termo".
+        // 2. Carregar um FXML de "resultados.fxml".
+        // 3. carregarTela("resultados.fxml"); (ou algo parecido)
     }
 
     private void carregarTela(String nomeFXML) throws IOException {
@@ -49,14 +85,6 @@ public class MainController {
     @FXML
     private void abrirPerfil(ActionEvent event) throws IOException {
         carregarTela("perfil.fxml");
-    }
-
-    @FXML
-    private void pesquisarPersonagem(KeyEvent event) throws IOException {
-        if (event.getCode().toString().equals("ENTER")) {
-            String termo = txtPesquisa.getText();
-            System.out.println("Pesquisando: " + termo);
-        }
     }
 
     // Preciso adicionar métodos para os botões restantes

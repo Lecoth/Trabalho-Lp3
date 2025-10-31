@@ -15,7 +15,7 @@
     -fx-background-position: center center;
 }
 
-/* Define a cor de fundo de todo o VBox do menu lateral */
+/* Define a cor de fundo do VBox do menu lateral */
 .menu-lateral {
     -fx-background-color: #F5F5F5;
 }
@@ -29,41 +29,31 @@
 .accordion > .titled-pane > .content {
     -fx-background-color: transparent; /* Tira o fundo da caixa */
     -fx-border-color: transparent;
-    -fx-padding: 0; /* Remove espaçamentos internos */
+    -fx-padding: 0;
 }
 
 /* Botões do menu */
-
 .menu-button {
-    /* Faz o botão ocupar a largura toda do VBox */
-    -fx-pref-width: 1000; /* Truque para forçar a largura máxima */
+    -fx-pref-width: 1000;
 
     /* Remove o fundo e bordas padrão */
     -fx-background-color: transparent;
     -fx-background-radius: 0;
     -fx-border-color: transparent;
 
-    /* Alinha o texto à esquerda */
     -fx-alignment: CENTER_LEFT;
     -fx-padding: 10 15;
 
-    /* Cor do texto */
     -fx-text-fill: #333333;
     -fx-font-weight: bold;
 }
 
 .menu-button:hover {
-    /* Efeito ao passar o mouse */
     -fx-background-color: #007bff;
     -fx-text-fill: white;
 }
 
-/*
- * Botões das telas de Login e Cadastro
- *
- * Usei .button.login-button para
- * vencer o estilo padrão do JavaFX.
- */
+/* Botões das telas de Login e Cadastro*/
 .button.login-button {
     /* Remove o fundo e a borda */
     -fx-background-color: transparent;
@@ -80,4 +70,19 @@
     -fx-text-fill: #339dff;
 
     -fx-underline: true;
+}
+
+/* Botões de menu e lupa */
+.icon-button {
+    /* Tira o fundo cinza e a borda */
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+
+    -fx-padding: 3;
+
+    -fx-background-radius: 5;
+}
+
+.icon-button:hover {
+    -fx-background-color: #4A6B9C;
 }

@@ -18,14 +18,14 @@
 
 <BorderPane fx:id="mainPane" prefHeight="400" prefWidth="600" stylesheets="@../css/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <top>
-      <AnchorPane layoutX="-1.0" layoutY="-2.0" prefHeight="83.0" prefWidth="408.0" style="-fx-background-color: #2A4B7C;" styleClass="header-background" BorderPane.alignment="CENTER">
+      <AnchorPane layoutX="-1.0" layoutY="-2.0" prefHeight="100.0" style="-fx-background-color: #2A4B7C;" styleClass="header-background" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="84.0" fitWidth="104.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="95.0" fitWidth="87.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/logo.png" />
                </image>
             </ImageView>
-            <Label layoutX="84.0" layoutY="15.0" prefHeight="52.0" prefWidth="238.0" text="Genshin Build">
+            <Label layoutX="87.0" layoutY="15.0" prefHeight="74.0" prefWidth="251.0" text="Genshin Build">
                <font>
                   <Font name="System Bold Italic" size="36.0" />
                </font>
@@ -46,12 +46,27 @@
                   </LinearGradient>
                </textFill>
             </Label>
-             <TextField fx:id="txtPesquisa" layoutX="338.0" layoutY="28.0" prefHeight="26.0" prefWidth="223.0" onKeyReleased="#pesquisarPersonagem"/>
+             <TextField fx:id="txtPesquisa" layoutY="36.0" onKeyReleased="#pesquisarPersonagem" prefHeight="26.0" prefWidth="223.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="36.0" />
+            <Button alignment="TOP_RIGHT" layoutY="36.0" mnemonicParsing="false" onAction="#toggleMenu" styleClass="icon-button" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/menu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutY="37.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="22.0" styleClass="icon-button" AnchorPane.rightAnchor="92.0" AnchorPane.topAnchor="37.0" />
+            <ImageView fitHeight="27.0" fitWidth="28.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="92.0" AnchorPane.topAnchor="37.0">
+               <image>
+                  <Image url="@../images/pesquisar.jpeg" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </top>
    <right>
-      <VBox prefHeight="317.0" prefWidth="126.0" styleClass="menu-lateral" BorderPane.alignment="CENTER">
+      <VBox fx:id="menuLateral" prefHeight="317.0" prefWidth="126.0" styleClass="menu-lateral" visible="false" BorderPane.alignment="CENTER">
          <children>
             <Accordion>
               <panes>
@@ -62,9 +77,9 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                            <children>
-                              <Button mnemonicParsing="false" styleClass="menu-button" text="Home" onAction="#abrirHome" />
-                              <Button mnemonicParsing="false" styleClass="menu-button" text="Perfil" onAction="#abrirPerfil" />
-                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="129.0" styleClass="menu-button" text="My Builds" onAction="#abrirBuilds" />
+                              <Button mnemonicParsing="false" onAction="#abrirHome" styleClass="menu-button" text="Home" />
+                              <Button mnemonicParsing="false" onAction="#abrirPerfil" styleClass="menu-button" text="Perfil" />
+                              <Button mnemonicParsing="false" onAction="#abrirBuilds" prefHeight="40.0" prefWidth="129.0" styleClass="menu-button" text="My Builds" />
                               <Button mnemonicParsing="false" styleClass="menu-button" text="Sair" />
                            </children>
                         </VBox>
