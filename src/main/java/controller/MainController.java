@@ -3,11 +3,13 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -87,6 +89,37 @@ public class MainController {
         carregarTela("perfil.fxml");
     }
 
+    @FXML
+    private void abrirBuildsGuia(ActionEvent event) throws IOException {
+        carregarTela("buildsguia.fxml");
+    }
+
+    @FXML
+    private void abrirUsersBuilds(ActionEvent event) throws IOException {
+        carregarTela("usersbuilds.fxml");
+    }
+
+    @FXML
+    private void abrirArmas(ActionEvent event) throws IOException {
+        carregarTela("armas.fxml");
+    }
+
+    @FXML
+    private void abrirArtefatos(ActionEvent event) throws IOException {
+        carregarTela("artefatos.fxml");
+    }
+
+    @FXML
+    private void fazerLogout(ActionEvent event) throws IOException {
+        // Carrega login
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        Stage stage = (Stage) mainPane.getScene().getWindow();
+
+        // Coloca a tela de login
+        stage.setScene(scene);
+    }
     // Preciso adicionar métodos para os botões restantes
     // (Favoritos, Sair, BuildsGuias, UsersBuilds, Artefatos, Armas)
 }
