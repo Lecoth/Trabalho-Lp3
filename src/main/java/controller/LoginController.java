@@ -1,6 +1,7 @@
 package controller;
 
-import model.Conexao;
+import dao.UsuarioDAO;
+import model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
 import java.io.IOException;
-import java.sql.*;
 
 public class LoginController {
     @FXML
@@ -19,25 +19,30 @@ public class LoginController {
     @FXML
     private Label lblMensagem;
 
+    private UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+    @FXML
     public void entrar(ActionEvent event) {
         String email = txtEmail.getText();
         String senha = txtSenha.getText();
 
-        try (Connection conn = Conexao.conectar()) {
-            String sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, email);
-            stmt.setString(2, senha);
-            ResultSet rs = stmt.executeQuery();
+        try {
+            // 2. Chame o DAO. O SQL foi movido para cá.
+            Usuario usuario = usuarioDAO.fazerLogin(email, senha);
 
-            if (rs.next()) {
+            // 3. O DAO retorna 'null' se não encontrar
+            if (usuario != null) {
                 lblMensagem.setText("Login realizado com sucesso!");
+
+                // (Opcional) Guarde o usuário logado para a tela principal
+                // Ex: UserSession.setUsuarioLogado(usuario);
+
                 abrirTelaPrincipal();
             } else {
                 lblMensagem.setText("Email ou senha incorretos.");
             }
         } catch (Exception e) {
-            lblMensagem.setText("Erro ao conectar: " + e.getMessage());
+            lblMensagem.setText("Erro: " + e.getMessage());
         }
     }
 

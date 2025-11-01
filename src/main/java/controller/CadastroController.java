@@ -1,12 +1,13 @@
 package controller;
 
-import model.Conexao;
+import dao.UsuarioDAO;
+import model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class CadastroController {
     @FXML
@@ -16,31 +17,37 @@ public class CadastroController {
     @FXML
     private Label lblMensagem;
 
+    private UsuarioDAO usuarioDAO = new UsuarioDAO();
+
     public void cadastrar(ActionEvent event) {
         String nome = txtNome.getText();
         String email = txtEmail.getText();
         String senha = txtSenha.getText();
 
-        //correção de erro da possibilidade de não preencher todos os campos
         if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
             lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
             lblMensagem.setText("Erro: Todos os campos são obrigatórios!");
-
             return;
         }
 
-        try (Connection conn = Conexao.conectar()) {
-            String sql = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, nome);
-            stmt.setString(2, email);
-            stmt.setString(3, senha);
-            stmt.executeUpdate();
+        Usuario novoUsuario = new Usuario();
+        novoUsuario.setNome(nome);
+        novoUsuario.setEmail(email);
+        novoUsuario.setSenha(senha); // O DAO vai lidar com a senha
 
+        try {
+            usuarioDAO.cadastrarUsuario(novoUsuario);
+
+            lblMensagem.setTextFill(javafx.scene.paint.Color.GREEN); // Boa prática
             lblMensagem.setText("Usuário cadastrado com sucesso!");
-            abrirTelaPrincipal();
-        } catch (Exception e) {
-            lblMensagem.setText("Erro: " + e.getMessage());
+
+            abrirTelaPrincipal(); // Seu login automático
+
+        } catch (SQLException e) {
+            lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
+            lblMensagem.setText("Erro ao cadastrar: " + e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
