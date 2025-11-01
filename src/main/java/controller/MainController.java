@@ -112,6 +112,11 @@ public class MainController {
     }
 
     @FXML
+    private void abrirAjuda(ActionEvent event) throws IOException {
+        carregarTela("ajuda.fxml");
+    }
+
+    @FXML
     private void fazerLogout(ActionEvent event) throws IOException {
         // Carrega login
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400" prefWidth="600" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+    <children>
+        <Label layoutX="48.0" layoutY="83.0" style="-fx-font-size: 18px;" text="Central de Ajuda" />
+      <TextArea layoutX="48.0" layoutY="141.0" prefHeight="66.0" prefWidth="429.0" />
+      <Text layoutX="48.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Escreva sua necessidade aqui:" />
+      <Button layoutX="419.0" layoutY="219.0" maxWidth="75.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="64.0" styleClass="menu-button" stylesheets="@../css/estilo.css" text="Enviar" />
+    </children>
+</AnchorPane>
