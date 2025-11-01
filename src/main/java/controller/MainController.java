@@ -1,5 +1,6 @@
 package controller;
 
+import db.UserSessao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Usuario;
 
 import java.io.IOException;
 
@@ -50,7 +52,6 @@ public class MainController {
         fazerPesquisa(); // O botão também chama o método
     }
 
-    // Método da pesquis
     private void fazerPesquisa() throws IOException {
         String termo = txtPesquisa.getText();
         System.out.println("Pesquisando: " + termo);
@@ -87,6 +88,7 @@ public class MainController {
     @FXML
     private void abrirPerfil(ActionEvent event) throws IOException {
         carregarTela("perfil.fxml");
+        Usuario u = UserSessao.getUsuarioLogado();
     }
 
     @FXML
@@ -120,6 +122,5 @@ public class MainController {
         // Coloca a tela de login
         stage.setScene(scene);
     }
-    // Preciso adicionar métodos para os botões restantes
-    // (Favoritos, Sair, BuildsGuias, UsersBuilds, Artefatos, Armas)
+
 }

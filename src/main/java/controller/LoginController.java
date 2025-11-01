@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-
+import db.UserSessao;
 import java.io.IOException;
 
 public class LoginController {
@@ -31,7 +31,7 @@ public class LoginController {
 
             if (usuario != null) {
                 lblMensagem.setText("Login realizado com sucesso!");
-
+                UserSessao.setUsuarioLogado(usuario);
                 abrirTelaPrincipal();
             } else {
                 lblMensagem.setText("Email ou senha incorretos.");
