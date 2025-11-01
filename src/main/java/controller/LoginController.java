@@ -27,15 +27,10 @@ public class LoginController {
         String senha = txtSenha.getText();
 
         try {
-            // 2. Chame o DAO. O SQL foi movido para cá.
             Usuario usuario = usuarioDAO.fazerLogin(email, senha);
 
-            // 3. O DAO retorna 'null' se não encontrar
             if (usuario != null) {
                 lblMensagem.setText("Login realizado com sucesso!");
-
-                // (Opcional) Guarde o usuário logado para a tela principal
-                // Ex: UserSession.setUsuarioLogado(usuario);
 
                 abrirTelaPrincipal();
             } else {

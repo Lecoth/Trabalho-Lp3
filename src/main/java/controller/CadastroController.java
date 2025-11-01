@@ -33,15 +33,15 @@ public class CadastroController {
         Usuario novoUsuario = new Usuario();
         novoUsuario.setNome(nome);
         novoUsuario.setEmail(email);
-        novoUsuario.setSenha(senha); // O DAO vai lidar com a senha
+        novoUsuario.setSenha(senha); // O dao vai lidar com a senha
 
         try {
             usuarioDAO.cadastrarUsuario(novoUsuario);
 
-            lblMensagem.setTextFill(javafx.scene.paint.Color.GREEN); // Boa prática
+            lblMensagem.setTextFill(javafx.scene.paint.Color.GREEN);
             lblMensagem.setText("Usuário cadastrado com sucesso!");
 
-            abrirTelaPrincipal(); // Seu login automático
+            abrirTelaPrincipal();
 
         } catch (SQLException e) {
             lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
