@@ -2,10 +2,10 @@ package model;
 
 public class BuildGuia {
     private int id_build_guia;
-    private int id_personagem;
-    private int id_arma_ideal;
+    private Personagem personagem;
+    private Arma arma;
+    private Artefato artefato;
     private String pq_arma_ideal;
-    private int id_art_set;
     private String main_sands;
     private String main_goblet;
     private String main_circlet;
@@ -20,20 +20,28 @@ public class BuildGuia {
         this.id_build_guia = id_build_guia;
     }
 
-    public int getId_personagem() {
-        return id_personagem;
+    public Personagem getPersonagem() {
+        return personagem;
     }
 
-    public void setId_personagem(int id_personagem) {
-        this.id_personagem = id_personagem;
+    public void setPersonagem(Personagem personagem) {
+        this.personagem = personagem;
     }
 
-    public int getId_arma_ideal() {
-        return id_arma_ideal;
+    public Arma getArma() {
+        return arma;
     }
 
-    public void setId_arma_ideal(int id_arma_ideal) {
-        this.id_arma_ideal = id_arma_ideal;
+    public void setArma(Arma arma) {
+        this.arma = arma;
+    }
+
+    public Artefato getArtefato() {
+        return artefato;
+    }
+
+    public void setArtefato(Artefato artefato) {
+        this.artefato = artefato;
     }
 
     public String getPq_arma_ideal() {
@@ -44,13 +52,6 @@ public class BuildGuia {
         this.pq_arma_ideal = pq_arma_ideal;
     }
 
-    public int getId_art_set() {
-        return id_art_set;
-    }
-
-    public void setId_art_set(int id_art_set) {
-        this.id_art_set = id_art_set;
-    }
 
     public String getMain_sands() {
         return main_sands;

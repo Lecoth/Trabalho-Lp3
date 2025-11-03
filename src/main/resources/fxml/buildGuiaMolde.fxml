@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BuildCardController">
+    <children>
+        <AnchorPane id="card" layoutX="14.0" layoutY="14.0" prefHeight="422.0" prefWidth="572.0" style="-fx-border-color: #AAAAAA; -fx-border-radius: 5; -fx-background-color: #FAFAFA;">
+            <children>
+                <ImageView fx:id="imgPersonagem" fitHeight="309.0" fitWidth="190.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+
+                <Label fx:id="lblNomePersonagem" layoutX="220.0" layoutY="20.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Nome Personagem" />
+
+                <ImageView fx:id="imgArma" fitHeight="40.0" fitWidth="40.0" layoutX="220.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
+                <Label fx:id="lblNomeArma" layoutX="264.0" layoutY="69.0" style="-fx-font-size: 16px;" text="Nome Arma" />
+
+                <ImageView fx:id="imgArtefato" fitHeight="40.0" fitWidth="40.0" layoutX="220.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
+                <Label fx:id="lblNomeArtefato" layoutX="264.0" layoutY="119.0" style="-fx-font-size: 16px;" text="Nome Artefato" />
+
+                <Label layoutX="220.0" layoutY="167.0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2A4B7C;" text="Main Stats Prioritários:" />
+
+                <ImageView id="imgSand" fitHeight="30.0" fitWidth="30.0" layoutX="215.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/artefatos/sands.png" />
+                    </image>
+                </ImageView>
+                <Text fx:id="txtSand" layoutX="260.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 14px;" text="Sands Stat" />
+
+                <ImageView id="imgGoblet" fitHeight="30.0" fitWidth="30.0" layoutX="215.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/artefatos/goblet.png" />
+                    </image>
+                </ImageView>
+                <Text fx:id="txtGoblet" layoutX="257.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 14px;" text="Goblet Stat" />
+
+                <ImageView id="imgCirclet" fitHeight="30.0" fitWidth="30.0" layoutX="215.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/artefatos/circlet.png" />
+                    </image>
+                </ImageView>
+                <Text fx:id="txtCirclet" layoutX="259.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 14px;" text="Circlet Stat" />
+
+                <Label fx:id="lblSubStatus" layoutX="225.0" layoutY="340.0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2A4B7C;" text="Substats Prioritários:" />
+
+                <Text fx:id="txtSubstatusDesc" layoutX="225.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 14px;" text="Substats..." wrappingWidth="346.0" />
+
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

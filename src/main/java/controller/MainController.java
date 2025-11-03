@@ -1,5 +1,6 @@
 package controller;
 
+import dao.BuildGuiaDAO;
 import db.UserSessao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.BuildGuia;
 import model.Usuario;
 
 import java.io.IOException;
@@ -26,16 +28,16 @@ public class MainController {
     @FXML
     private VBox menuLateral;
 
+    private BuildGuiaDAO buildGuiaDAO = new BuildGuiaDAO();
+
     @FXML
     public void initialize() throws IOException {
-        carregarTela("home.fxml"); // Tela inicial padrão
+        carregarTela("home.fxml"); // Tela inicial padrão, depois fazer um design melhor dela.
     }
     @FXML
     private void toggleMenu(ActionEvent event) {
-        // Pega o estado atual
         boolean isVisible = menuLateral.isVisible();
 
-        // Inverte se está visível ou não
         menuLateral.setVisible(!isVisible);
         menuLateral.setManaged(!isVisible);
     }
@@ -43,23 +45,40 @@ public class MainController {
     @FXML
     private void pesquisarPersonagem(KeyEvent event) throws IOException {
         if (event.getCode().toString().equals("ENTER")) {
-            fazerPesquisa(); // Chama o novo método
+            fazerPesquisa();
         }
     }
 
     @FXML
     private void iniciarPesquisaClick(ActionEvent event) throws IOException {
-        fazerPesquisa(); // O botão também chama o método
+        fazerPesquisa();
     }
 
     private void fazerPesquisa() throws IOException {
-        String termo = txtPesquisa.getText();
+        String termo = txtPesquisa.getText().trim();
+        if (termo.isEmpty()) {
+            carregarTela("home.fxml"); // Se a pesquisa for vazia, volta pra home
+            return;
+        }
+
         System.out.println("Pesquisando: " + termo);
 
-        // Coisas que tenho que fazer aqui depois:
-        // 1. Chamar o banco de dados com o "termo".
-        // 2. Carregar um FXML de "resultados.fxml".
-        // 3. carregarTela("resultados.fxml"); (ou algo parecido)
+        BuildGuia buildEncontrada = buildGuiaDAO.buscarBuildGuiaPorPersonagem(termo);
+
+        if (buildEncontrada != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/buildGuiaMolde.fxml"));
+            Node buildView = loader.load();
+
+            BuildCardController cardController = loader.getController();
+
+            cardController.setBuild(buildEncontrada);
+
+            mainPane.setCenter(buildView);
+
+        } else {
+            System.out.println("Build não encontrada.");
+            carregarTela("naoEncontrado.fxml");
+        }
     }
 
     private void carregarTela(String nomeFXML) throws IOException {
@@ -118,13 +137,11 @@ public class MainController {
 
     @FXML
     private void fazerLogout(ActionEvent event) throws IOException {
-        // Carrega login
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         Stage stage = (Stage) mainPane.getScene().getWindow();
 
-        // Coloca a tela de login
         stage.setScene(scene);
     }
 
