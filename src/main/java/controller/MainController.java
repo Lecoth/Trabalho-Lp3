@@ -107,7 +107,6 @@ public class MainController {
     @FXML
     private void abrirPerfil(ActionEvent event) throws IOException {
         carregarTela("perfil.fxml");
-        Usuario u = UserSessao.getUsuarioLogado();
     }
 
     @FXML

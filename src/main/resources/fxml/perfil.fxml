@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" prefWidth="600" prefHeight="400">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PerfilController">
     <children>
-        <Label text="Tela de  Perfil de Usuário" layoutX="200" layoutY="180" style="-fx-font-size: 18px;"/>
+        <VBox layoutX="50.0" layoutY="50.0" spacing="10.0">
+            <children>
+                <Label text="Dados do Perfil:">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+
+                <Label text="Nome de Usuário:">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label fx:id="lblNomeUsuario" style="-fx-font-size: 14px;" text="Carregando...">
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </Label>
+
+                <Label text="Email Cadastrado:">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Label>
+                <Label fx:id="lblEmailUsuario" style="-fx-font-size: 14px;" text="Carregando...">
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </Label>
+            </children>
+        </VBox>
     </children>
 </AnchorPane>
-
