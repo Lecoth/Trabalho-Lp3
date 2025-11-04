@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="230.0" prefWidth="560.0" styleClass="card-base" stylesheets="@../css/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArtefatoCardController">
+    <children>
+        <ImageView fx:id="imgArtefato" fitHeight="100.0" fitWidth="100.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+
+        <Label fx:id="lblNomeSet" layoutX="140.0" layoutY="20.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Nome do Artefato" />
+
+        <Label layoutX="140.0" layoutY="61.0" style="-fx-font-weight: bold;" text="Efeito de 2 peças:" />
+        <Text fx:id="txt2pecas" layoutX="259.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Substatus" />
+
+        <Label layoutX="20.0" layoutY="130.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2A4B7C;" text="Efeito de 4 peças:" />
+
+        <Text fx:id="txt4pecas" layoutX="19.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição longa do efeito da arma..." wrappingWidth="532.0" />
+    </children>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+</AnchorPane>

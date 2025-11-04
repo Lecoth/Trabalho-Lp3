@@ -86,3 +86,36 @@
 .icon-button:hover {
     -fx-background-color: #4A6B9C;
 }
+
+/*Estilo para a página home*/
+.home-container {
+    -fx-background-color: #FFFFFF;
+}
+
+.home-banner-image {
+    -fx-alignment: CENTER;
+}
+
+.home-text-container {
+    -fx-background-color: #FFFFFF;
+}
+
+.home-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2A4B7C;
+}
+
+.home-body-text {
+    -fx-font-size: 14px;
+    -fx-fill: #333333;
+    -fx-line-spacing: 5px;
+}
+
+/* Estilo para os cards*/
+.card-base {
+    -fx-background-color: #FAFAFA;
+    -fx-border-color: #AAAAAA;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}

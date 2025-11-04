@@ -1,11 +1,12 @@
 package controller;
 
-import dao.BuildGuiaDAO;
+import dao.PersonagemDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
-import model.BuildGuia;
+import model.Personagem;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -14,27 +15,26 @@ public class PersonagensController {
     @FXML
     private VBox vboxConteudo;
 
-    private BuildGuiaDAO buildGuiaDAO = new BuildGuiaDAO();
+    private PersonagemDAO personagemDAO = new PersonagemDAO();
 
     @FXML
     public void initialize() {
-        carregarBuilds();
+        carregarPersonagens();
     }
 
-    private void carregarBuilds() {
-        // Busca todas as builds do banco
-        List<BuildGuia> listaDeBuilds = buildGuiaDAO.buscarTodasBuildsGuia();
+    private void carregarPersonagens() {
+        List<Personagem> listaDePersonagens = personagemDAO.buscarTodosPersonagens();
 
         vboxConteudo.getChildren().clear();
 
-        for (BuildGuia build : listaDeBuilds) {
+        for (Personagem p : listaDePersonagens) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/buildGuiaMolde.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/personagemMolde.fxml"));
                 Node cardNode = loader.load();
 
-                BuildCardController cardController = loader.getController();
+                PersonagemCardController cardController = loader.getController();
 
-                cardController.setBuild(build);
+                cardController.setPersonagem(p);
 
                 vboxConteudo.getChildren().add(cardNode);
 
