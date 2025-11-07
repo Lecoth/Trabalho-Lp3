@@ -79,6 +79,7 @@
                      </font>
                   </Label>
                     <PasswordField fx:id="txtSenha" maxWidth="300.0" prefWidth="180" />
+                   <Label fx:id="lblMensagem" style="-fx-text-fill: red; -fx-font-weight: bold;" />
                     <Button onAction="#cadastrar" styleClass="login-button" text="Cadastrar" />
                     <Button onAction="#voltar" styleClass="login-button" text="Voltar" />
                </children>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminArtefatoController">
+    <content>
+        <VBox alignment="TOP_CENTER" spacing="15.0">
+            <children>
+                <VBox maxWidth="600.0" spacing="10.0">
+                    <children>
+                        <Label text="Cadastrar Novo Artefato">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+
+                        <Label text="Nome do Set:" style="-fx-font-weight: bold;" />
+                        <TextField fx:id="txtNomeset" promptText="Ex: Noblesse Oblige" />
+
+                        <Label text="Estrelas (1-5):" style="-fx-font-weight: bold;" />
+                        <TextField fx:id="txtEstrelas" promptText="Ex: 5" />
+
+                        <Label text="Caminho da Imagem:" style="-fx-font-weight: bold;" />
+                        <TextField fx:id="txtImagem" promptText="Ex: images/armas/noblesse.png" />
+
+                        <Label text="Efeito de 2 peças:" style="-fx-font-weight: bold;" />
+                        <TextArea fx:id="txt2pecas" promptText="Descrição do efeito..." wrapText="true" />
+
+                        <Label text="Efeito de 4 peças:" style="-fx-font-weight: bold;" />
+                        <TextArea fx:id="txt4pecas" promptText="Descrição do efeito..." wrapText="true" />
+
+                        <Label fx:id="lblMensagem" style="-fx-font-weight: bold;" />
+
+                        <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvarArtefato" styleClass="menu-button" text="Salvar Artefato" />
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+        </VBox>
+    </content>
+</ScrollPane>

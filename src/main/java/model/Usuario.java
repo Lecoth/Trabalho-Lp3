@@ -5,6 +5,7 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
+    private boolean isAdmin;
 
     public int getIdUser() {
         return idUser;
@@ -36,5 +37,13 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

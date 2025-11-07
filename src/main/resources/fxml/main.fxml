@@ -110,6 +110,17 @@
                         </VBox>
                      </content>
                 </TitledPane>
+                  <TitledPane fx:id="adminPane" animated="false" text="Admin" textFill="#fcaa1e" visible="false" managed="false">
+                      <content>
+                          <VBox prefHeight="200.0" prefWidth="100.0">
+                              <children>
+                                  <Button mnemonicParsing="false" onAction="#abrirAdminPersonagens" styleClass="menu-button" text="Cad. Personagem" />
+                                  <Button mnemonicParsing="false" onAction="#abrirAdminArmas" styleClass="menu-button" text="Cad. Arma" />
+                                  <Button mnemonicParsing="false" onAction="#abrirAdminArtefatos" styleClass="menu-button" text="Cad. Artefato" />
+                              </children>
+                          </VBox>
+                      </content>
+                  </TitledPane>
               </panes>
             </Accordion>
          </children>

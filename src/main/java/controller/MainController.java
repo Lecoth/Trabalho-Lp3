@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.control.TitledPane;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -21,18 +22,25 @@ public class MainController {
 
     @FXML
     private BorderPane mainPane;
-
     @FXML
     private TextField txtPesquisa;
-
     @FXML
     private VBox menuLateral;
+    @FXML
+    private TitledPane adminPane;
 
     private BuildGuiaDAO buildGuiaDAO = new BuildGuiaDAO();
 
     @FXML
     public void initialize() throws IOException {
-        carregarTela("home.fxml"); // Tela inicial padrão, depois fazer um design melhor dela.
+        carregarTela("home.fxml");
+
+        Usuario usuarioLogado = UserSessao.getUsuarioLogado();
+
+        if (usuarioLogado != null && usuarioLogado.isAdmin()) {
+            adminPane.setVisible(true);
+            adminPane.setManaged(true); // Faz o painel ocupar espaço no layout
+        }
     }
     @FXML
     private void toggleMenu(ActionEvent event) {
@@ -142,6 +150,21 @@ public class MainController {
         Stage stage = (Stage) mainPane.getScene().getWindow();
 
         stage.setScene(scene);
+    }
+
+    @FXML
+    private void abrirAdminPersonagens(ActionEvent event) throws IOException {
+        carregarTela("adminPersonagem.fxml");
+    }
+
+    @FXML
+    private void abrirAdminArmas(ActionEvent event) throws IOException {
+        carregarTela("adminArma.fxml");
+    }
+
+    @FXML
+    private void abrirAdminArtefatos(ActionEvent event) throws IOException {
+        carregarTela("adminArtefato.fxml");
     }
 
 }

@@ -26,17 +26,26 @@ public class LoginController {
         String email = txtEmail.getText();
         String senha = txtSenha.getText();
 
+        if (email.isEmpty() || senha.isEmpty()) {
+            lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
+            lblMensagem.setText("Erro: Email e senha são obrigatórios!");
+            return;
+        }
+
         try {
             Usuario usuario = usuarioDAO.fazerLogin(email, senha);
 
             if (usuario != null) {
+                lblMensagem.setTextFill(javafx.scene.paint.Color.GREEN);
                 lblMensagem.setText("Login realizado com sucesso!");
                 UserSessao.setUsuarioLogado(usuario);
                 abrirTelaPrincipal();
             } else {
+                lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
                 lblMensagem.setText("Email ou senha incorretos.");
             }
         } catch (Exception e) {
+            lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
             lblMensagem.setText("Erro: " + e.getMessage());
         }
     }

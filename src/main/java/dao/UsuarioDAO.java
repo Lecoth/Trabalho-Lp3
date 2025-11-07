@@ -56,6 +56,7 @@ public class UsuarioDAO {
                 usuario.setIdUser(rs.getInt("idUser"));
                 usuario.setNome(rs.getString("nome"));
                 usuario.setEmail(rs.getString("email"));
+                usuario.setAdmin(rs.getBoolean("is_admin"));
                 // Não colocando a senha do objeto por segurança
 
                 // Retorna usuario preenchido

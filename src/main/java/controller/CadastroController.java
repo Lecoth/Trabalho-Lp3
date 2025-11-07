@@ -1,6 +1,7 @@
 package controller;
 
 import dao.UsuarioDAO;
+import db.UserSessao;
 import model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,15 +39,31 @@ public class CadastroController {
         try {
             usuarioDAO.cadastrarUsuario(novoUsuario);
 
-            lblMensagem.setTextFill(javafx.scene.paint.Color.GREEN);
-            lblMensagem.setText("Usuário cadastrado com sucesso!");
+            Usuario usuarioLogado = usuarioDAO.fazerLogin(novoUsuario.getEmail(), novoUsuario.getSenha());
 
-            abrirTelaPrincipal();
+            if (usuarioLogado != null) {
+                UserSessao.setUsuarioLogado(usuarioLogado);
+
+                lblMensagem.setTextFill(javafx.scene.paint.Color.GREEN);
+                lblMensagem.setText("Usuário cadastrado com sucesso! Logando...");
+
+                abrirTelaPrincipal();
+            } else {
+                lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
+                lblMensagem.setText("Cadastro realizado, mas falha ao logar. Tente na tela de login.");
+            }
 
         } catch (SQLException e) {
             lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
-            lblMensagem.setText("Erro ao cadastrar: " + e.getMessage());
+
+            if (e.getMessage().contains("Duplicate entry")) {
+                lblMensagem.setText("Erro: Este e-mail já está cadastrado.");
+            } else {
+                lblMensagem.setText("Erro no banco de dados. Tente novamente.");
+            }
         } catch (IOException e) {
+            lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
+            lblMensagem.setText("Erro ao cadastrar: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }

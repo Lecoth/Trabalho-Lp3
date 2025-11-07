@@ -6,6 +6,7 @@ import model.Arma;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,5 +37,30 @@ public class ArmaDAO {
             e.printStackTrace();
         }
         return armas;
+    }
+
+    public void inserirArma(Arma a) throws SQLException {
+        String sql = "INSERT INTO arma (nome, tipo_arma, estrelas, base_atk, sub_status, efeito, imagem) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = Conexao.conectar()) {
+            if (conn == null) {
+                throw new SQLException("Não foi possível conectar ao banco de dados.");
+            }
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, a.getNome());
+            stmt.setString(2, a.getTipo_arma());
+            stmt.setInt(3, a.getEstrelas());
+            stmt.setInt(4, a.getBase_atk());
+            stmt.setString(5, a.getSub_status());
+            stmt.setString(6, a.getEfeito());
+            stmt.setString(7, a.getImagem());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Erro no ArmaDAO ao inserir: " + e.getMessage());
+            throw e;
+        }
     }
 }

@@ -16,7 +16,6 @@
 
 <AnchorPane prefHeight="349.0" prefWidth="396.0" styleClass="login-background" stylesheets="@../css/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
     <children>
-        <Label fx:id="lblMensagem" layoutX="120" layoutY="220" textFill="red" />
       <AnchorPane layoutX="-1.0" layoutY="-2.0" prefHeight="83.0" style="-fx-background-color: #2A4B7C;" styleClass="header-background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <Label layoutX="73.0" layoutY="16.0" prefHeight="52.0" prefWidth="238.0" text="Genshin Build">
@@ -69,6 +68,7 @@
                      </font>
                   </Label>
                     <PasswordField fx:id="txtSenha" maxWidth="300.0" prefHeight="19.0" prefWidth="228.0" />
+                    <Label fx:id="lblMensagem" style="-fx-text-fill: red; -fx-font-weight: bold;" />
                     <Button onAction="#entrar" styleClass="login-button" text="Entrar" />
                     <Button onAction="#abrirCadastro" styleClass="login-button" stylesheets="@../css/estilo.css" text="Cadastrar" />
                </children>
