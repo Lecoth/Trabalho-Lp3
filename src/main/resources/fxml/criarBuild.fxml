@@ -54,7 +54,8 @@
                             </VBox.margin>
                         </CheckBox>
 
-                        <Button fx:id="btnSalvar" mnemonicParsing="false" styleClass="menu-button" text="Salvar Build" />
+                        <Label fx:id="lblMensagem" style="-fx-font-weight: bold;" />
+                        <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvarBuild" styleClass="menu-button" text="Salvar Build" />
                     </children>
                 </VBox>
             </children>
