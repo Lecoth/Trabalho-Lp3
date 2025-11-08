@@ -119,3 +119,63 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
+
+/* Remove o fundo padrão do Accordion */
+.menu-lateral .accordion {
+    -fx-background-color: white;
+}
+
+.menu-lateral .titled-pane > .title {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-padding: 10 15; /* Espaçamento */
+    -fx-background-radius: 0;
+}
+
+/* Força o texto do cabeçalho a ser escuro e negrito */
+.menu-lateral .titled-pane > .title .text {
+    -fx-fill: #333333;
+    -fx-font-weight: bold;
+}
+
+.menu-lateral .titled-pane > .title > .arrow-button {
+    -fx-padding: 0 4 0 0;
+}
+
+.menu-lateral .titled-pane > .title > .arrow-button .arrow {
+    -fx-background-color: #333333; /* Cor da seta */
+    -fx-padding: 4; /* Tamanho da seta */
+}
+
+.menu-lateral .titled-pane:expanded > .title > .arrow-button {
+    -fx-rotate: 90;
+}
+
+.menu-lateral .titled-pane:expanded > .title {
+    -fx-border-color: transparent;
+}
+
+.menu-lateral .titled-pane > .content {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.menu-button {
+    -fx-pref-width: 1000;
+    -fx-background-color: white; /* Fundo branco */
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+    -fx-alignment: CENTER_LEFT;
+
+    -fx-padding: 10 15 10 25;
+
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+}
+
+.menu-button:hover {
+    -fx-background-color: #f0f0f0;
+    -fx-text-fill: #007bff;
+}

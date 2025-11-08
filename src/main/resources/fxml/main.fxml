@@ -69,11 +69,11 @@
       </AnchorPane>
    </top>
    <right>
-      <VBox fx:id="menuLateral" prefHeight="317.0" prefWidth="126.0" styleClass="menu-lateral" visible="false" BorderPane.alignment="CENTER">
+      <VBox fx:id="menuLateral" prefHeight="317.0" prefWidth="180.0" styleClass="menu-lateral" visible="false" BorderPane.alignment="CENTER">
          <children>
             <Accordion>
               <panes>
-                <TitledPane animated="false" stylesheets="@../css/estilo.css" text="Usuário" textFill="#fcaa1e">
+                <TitledPane animated="false" stylesheets="@../css/estilo.css" text="Usuário">
                      <content>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <padding>
@@ -89,7 +89,7 @@
                         </VBox>
                      </content>
                 </TitledPane>
-                <TitledPane animated="false" text="Personagens" textFill="#fcaa1e">
+                <TitledPane animated="false" text="Personagens">
                      <content>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
@@ -100,7 +100,7 @@
                         </VBox>
                      </content>
                 </TitledPane>
-                <TitledPane animated="false" text="Equipamentos" textFill="#fcaa1e">
+                <TitledPane animated="false" text="Equipamentos">
                      <content>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
@@ -110,7 +110,7 @@
                         </VBox>
                      </content>
                 </TitledPane>
-                  <TitledPane fx:id="adminPane" animated="false" text="Admin" textFill="#fcaa1e" visible="false" managed="false">
+                  <TitledPane fx:id="adminPane" animated="false" text="Admin" visible="false" managed="false">
                       <content>
                           <VBox prefHeight="200.0" prefWidth="100.0">
                               <children>

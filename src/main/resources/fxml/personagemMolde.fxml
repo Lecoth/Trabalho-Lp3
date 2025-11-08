@@ -10,7 +10,6 @@
         <ImageView fx:id="imgPersonagem" fitHeight="260.0" fitWidth="177.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
         <Label fx:id="lblNomePersonagem" alignment="CENTER" layoutY="269.0" style="-fx-font-weight: bold;" text="Nome" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
         <Label fx:id="lblElemento" alignment="CENTER" layoutY="285.0" text="Elemento" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-            <font>
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
