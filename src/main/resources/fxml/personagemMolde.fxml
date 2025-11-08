@@ -3,10 +3,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="301.0" prefWidth="183.0" style="-fx-border-color: #AAAAAA; -fx-background-color: #FAFAFA; -fx-border-radius: 5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PersonagemCardController">
     <children>
         <ImageView fx:id="imgPersonagem" fitHeight="260.0" fitWidth="177.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
-        <Label fx:id="lblNomePersonagem" alignment="CENTER" layoutX="42.0" layoutY="269.0" prefWidth="100.0" style="-fx-font-weight: bold;" text="Nome" />
+        <Label fx:id="lblNomePersonagem" alignment="CENTER" layoutY="269.0" style="-fx-font-weight: bold;" text="Nome" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+        <Label fx:id="lblElemento" alignment="CENTER" layoutY="285.0" text="Elemento" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <font>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
     </children>
 </AnchorPane>

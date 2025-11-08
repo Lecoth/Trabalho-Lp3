@@ -11,34 +11,26 @@ public class BuildCardController {
 
     @FXML
     private ImageView imgPersonagem;
-
     @FXML
     private ImageView imgArma;
-
     @FXML
     private ImageView imgArtefato;
-
     @FXML
     private Label lblNomePersonagem;
-
+    @FXML
+    private Label lblElemento;
     @FXML
     private Label lblNomeArma;
-
     @FXML
     private Label lblNomeArtefato;
-
     @FXML
     private Text txtSand;
-
     @FXML
     private Text txtGoblet;
-
     @FXML
     private Text txtCirclet;
-
     @FXML
     private Label lblSubStatus;
-
     @FXML
     private Text txtSubstatusDesc;
 
@@ -53,6 +45,7 @@ public class BuildCardController {
         }
 
         lblNomePersonagem.setText(build.getPersonagem().getNome());
+        lblElemento.setText(build.getPersonagem().getElemento());
         lblNomeArma.setText(build.getArma().getNome());
         lblNomeArtefato.setText(build.getArtefato().getNome_set());
 

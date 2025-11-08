@@ -167,4 +167,9 @@ public class MainController {
         carregarTela("adminArtefato.fxml");
     }
 
+    @FXML
+    private void abrirAdminBuildGuia(ActionEvent event) throws IOException {
+        carregarTela("adminBuildGuia.fxml");
+    }
+
 }

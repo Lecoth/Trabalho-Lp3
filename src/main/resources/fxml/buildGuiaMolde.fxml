@@ -12,7 +12,8 @@
             <children>
                 <ImageView fx:id="imgPersonagem" fitHeight="309.0" fitWidth="190.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
 
-                <Label fx:id="lblNomePersonagem" layoutX="220.0" layoutY="20.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Nome Personagem" />
+                <Label fx:id="lblNomePersonagem" layoutX="220.0" layoutY="20.0" prefHeight="25.0" prefWidth="184.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Nome Personagem" />
+                <Label fx:id="lblElemento" layoutX="415.0" layoutY="27.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Elemento" textFill="#1b1717" />
 
                 <ImageView fx:id="imgArma" fitHeight="40.0" fitWidth="40.0" layoutX="220.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
                 <Label fx:id="lblNomeArma" layoutX="264.0" layoutY="69.0" style="-fx-font-size: 16px;" text="Nome Arma" />

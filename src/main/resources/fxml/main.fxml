@@ -117,6 +117,7 @@
                                   <Button mnemonicParsing="false" onAction="#abrirAdminPersonagens" styleClass="menu-button" text="Cad. Personagem" />
                                   <Button mnemonicParsing="false" onAction="#abrirAdminArmas" styleClass="menu-button" text="Cad. Arma" />
                                   <Button mnemonicParsing="false" onAction="#abrirAdminArtefatos" styleClass="menu-button" text="Cad. Artefato" />
+                                  <Button mnemonicParsing="false" onAction="#abrirAdminBuildGuia" styleClass="menu-button" text="Cad. Build Guia" />
                               </children>
                           </VBox>
                       </content>

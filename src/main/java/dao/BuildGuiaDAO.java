@@ -6,6 +6,7 @@ import model.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -136,5 +137,38 @@ public class BuildGuiaDAO {
             e.printStackTrace();
         }
         return builds;
+    }
+
+    public void inserirBuildGuia(BuildGuia build) throws SQLException {
+        // A tabela build_guia espera os ids, e os outros campos de texto.
+        String sql = "INSERT INTO build_guia (id_personagem, id_arma_ideal, id_art_set, pq_arma_ideal, main_sands, main_goblet, main_circlet, substats, ideal_status) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = Conexao.conectar()) {
+            if (conn == null) {
+                throw new SQLException("Não foi possível conectar ao banco de dados.");
+            }
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            // Pega os ids
+            stmt.setInt(1, build.getPersonagem().getId_personagem());
+            stmt.setInt(2, build.getArma().getId_arma());
+            stmt.setInt(3, build.getArtefato().getId_artefato());
+
+            // Pega os campos de texto
+            stmt.setString(4, build.getPq_arma_ideal());
+            stmt.setString(5, build.getMain_sands());
+            stmt.setString(6, build.getMain_goblet());
+            stmt.setString(7, build.getMain_circlet());
+            stmt.setString(8, build.getSubstatus());
+            stmt.setString(9, build.getIdeal_status());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Erro no BuildGuiaDAO ao inserir: " + e.getMessage());
+            throw e;
+        }
     }
 }
