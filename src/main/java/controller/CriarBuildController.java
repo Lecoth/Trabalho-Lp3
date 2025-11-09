@@ -60,10 +60,6 @@ public class CriarBuildController {
         comboCirclet.getItems().addAll("Taxa Crítica", "Dano Crítico", "Bônus de Cura", "ATK%", "HP%", "DEF%", "Proficiência Elemental");
     }
 
-    /**
-     * Carrega os ComboBoxes de Personagem, Arma e Artefato com dados do banco.
-     * (Lógica reutilizada do AdminBuildGuiaController)
-     */
     private void carregarComboBoxes() {
         List<Personagem> personagens = personagemDAO.buscarTodosPersonagens();
         List<Arma> armas = armaDAO.buscarTodasArmas();
@@ -132,17 +128,16 @@ public class CriarBuildController {
 
             // Montar o objeto BuildUsuario
             BuildUsuario build = new BuildUsuario();
-            build.setId_usuario(usuarioLogado.getIdUser()); // id do usuário logado
-            build.setId_personagem(p.getId_personagem());   // id do personagem
-            build.setId_arma_usada(a.getId_arma());         // id da arma
-            build.setId_art_set(art.getId_artefato());      // id do artefato
+            build.setId_usuario(usuarioLogado.getIdUser());
+            build.setId_personagem(p.getId_personagem());
+            build.setId_arma_usada(a.getId_arma());
+            build.setId_art_set(art.getId_artefato());
             build.setNome_build(nomeBuild);
             build.setPrivada(isPrivada);
             build.setSands_main(sands);
             build.setGoblet_main(goblet);
             build.setCirclet_main(circlet);
 
-            // Salvar no banco
             buildUsuarioDAO.inserirBuildUsuario(build);
 
             lblMensagem.setTextFill(javafx.scene.paint.Color.GREEN);

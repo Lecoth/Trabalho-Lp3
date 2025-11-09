@@ -120,7 +120,6 @@ public class AdminBuildGuiaController {
             build.setSubstatus(substats);
             build.setIdeal_status(idealStatus);
 
-            // Salva no banco
             buildGuiaDAO.inserirBuildGuia(build);
 
             lblMensagem.setTextFill(javafx.scene.paint.Color.GREEN);

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="controller.BotaoCriarBuildController">
+    <children>
+        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirFormularioCriarBuild" styleClass="menu-button" text="Criar Nova Build">
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </Button>
+    </children>
+</VBox>
