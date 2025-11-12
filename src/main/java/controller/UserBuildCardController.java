@@ -70,9 +70,6 @@ public class UserBuildCardController {
         }
     }
 
-    /**
-     * Chame isso ANTES de setBuild() se quiser mostrar o nome do autor.
-     */
     public void setMostrarAutor(boolean mostrar) {
         this.mostrarAutor = mostrar;
     }

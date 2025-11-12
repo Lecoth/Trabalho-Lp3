@@ -14,9 +14,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.BuildGuia;
+import model.BuildUserInfo;
 import model.Usuario;
+import dao.BuildUsuarioDAO;
 
 import java.io.IOException;
+import java.util.List;
 
 public class MainController {
 
@@ -29,6 +32,7 @@ public class MainController {
     @FXML
     private TitledPane adminPane;
 
+    private BuildUsuarioDAO buildUsuarioDAO = new BuildUsuarioDAO();
     private BuildGuiaDAO buildGuiaDAO = new BuildGuiaDAO();
 
     @FXML
@@ -39,7 +43,7 @@ public class MainController {
 
         if (usuarioLogado != null && usuarioLogado.isAdmin()) {
             adminPane.setVisible(true);
-            adminPane.setManaged(true); // Faz o painel ocupar espaço no layout
+            adminPane.setManaged(true);
         }
     }
     @FXML
@@ -69,23 +73,33 @@ public class MainController {
             return;
         }
 
-        System.out.println("Pesquisando: " + termo);
+        System.out.println("Pesquisando por: " + termo);
 
-        BuildGuia buildEncontrada = buildGuiaDAO.buscarBuildGuiaPorPersonagem(termo);
+        BuildGuia buildGuiaEncontrada = buildGuiaDAO.buscarBuildGuiaPorPersonagem(termo);
 
-        if (buildEncontrada != null) {
+        if (buildGuiaEncontrada != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/buildGuiaMolde.fxml"));
             Node buildView = loader.load();
-
             BuildCardController cardController = loader.getController();
-
-            cardController.setBuild(buildEncontrada);
-
+            cardController.setBuild(buildGuiaEncontrada);
             mainPane.setCenter(buildView);
 
         } else {
-            System.out.println("Build não encontrada.");
-            carregarTela("naoEncontrado.fxml");
+            List<BuildUserInfo> buildsUsuarioEncontradas = buildUsuarioDAO.buscarBuildsPublicasPorNome(termo);
+
+            if (buildsUsuarioEncontradas != null && !buildsUsuarioEncontradas.isEmpty()) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/usersbuilds.fxml"));
+                Node node = loader.load();
+
+                UserBuildsController controller = loader.getController();
+                controller.carregarBuildsPesquisadas(buildsUsuarioEncontradas);
+
+                mainPane.setCenter(node);
+
+            } else {
+                System.out.println("Build não encontrada em Guias ou User Builds.");
+                carregarTela("naoEncontrado.fxml");
+            }
         }
     }
 
