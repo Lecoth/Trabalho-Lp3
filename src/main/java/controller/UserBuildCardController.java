@@ -1,14 +1,29 @@
 package controller;
 
+import dao.BuildUsuarioDAO;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.BuildUserInfo;
+import utils.ImageUtils;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Optional;
 
 public class UserBuildCardController {
 
+    @FXML
+    private AnchorPane rootPane;
     @FXML
     private ImageView imgPersonagem;
     @FXML
@@ -16,7 +31,7 @@ public class UserBuildCardController {
     @FXML
     private ImageView imgArtefato;
     @FXML
-    private Label lblNomeBuild; // Título
+    private Label lblNomeBuild;
     @FXML
     private Label lblNomePersonagem;
     @FXML
@@ -35,11 +50,21 @@ public class UserBuildCardController {
     private Label lblStatusPrivacidade;
     @FXML
     private Label lblAutor;
+    @FXML
+    private Button btnEditar, btnDeletar;
+    @FXML
+    private HBox botoesHBox;
+    @FXML
+    private TextArea txtDescricao;
 
-    // Flag para saber se esta na tela My Builds ou User Builds
+    private BuildUserInfo build;
+    private BuildUsuarioDAO buildUsuarioDAO = new BuildUsuarioDAO();
+    private VBox parentVBox;
     private boolean mostrarAutor = false;
 
     public void setBuild(BuildUserInfo build) {
+        this.build = build;
+
         if (build == null) {
             System.out.println("Build nula recebida em UserBuildCardController");
             return;
@@ -67,6 +92,18 @@ public class UserBuildCardController {
         if (mostrarAutor) {
             lblAutor.setText("Criado por: " + build.getNome_usuario());
             lblAutor.setVisible(true);
+            botoesHBox.setVisible(false);
+            botoesHBox.setManaged(false);
+        } else {
+            lblAutor.setVisible(false);
+            botoesHBox.setVisible(true);
+            botoesHBox.setManaged(true);
+        }
+
+        if (build.getDescricao() != null && !build.getDescricao().isEmpty()) {
+            txtDescricao.setText(build.getDescricao());
+        } else {
+            txtDescricao.setText("Sem descrição.");
         }
     }
 
@@ -74,24 +111,57 @@ public class UserBuildCardController {
         this.mostrarAutor = mostrar;
     }
 
-    private Image carregarImagemSegura(String caminhoDoBanco) {
-        if (caminhoDoBanco == null || caminhoDoBanco.isEmpty()) {
-            System.out.println("Caminho de imagem vazio.");
-            return null;
+    public void setParentVBox(VBox parentVBox) {
+        this.parentVBox = parentVBox;
+    }
+
+    @FXML
+    void deletarBuild(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar Exclusão");
+        alert.setHeaderText("Deletar Build: " + build.getNome_build());
+        alert.setContentText("Você tem certeza que quer deletar esta build? Esta ação não pode ser desfeita.");
+        javafx.stage.Stage stage = (javafx.stage.Stage) rootPane.getScene().getWindow();
+        alert.initOwner(stage);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                buildUsuarioDAO.deletarBuildUsuario(build.getId_build_user());
+                parentVBox.getChildren().remove(rootPane);
+            } catch (SQLException e) {
+                Alert erroAlert = new Alert(Alert.AlertType.ERROR);
+                erroAlert.setTitle("Erro de SQL");
+                erroAlert.setContentText("Não foi possível deletar a build: " + e.getMessage());
+                erroAlert.showAndWait();
+            }
         }
+    }
+
+    @FXML
+    void editarBuild(ActionEvent event) {
         try {
-            if (!caminhoDoBanco.startsWith("/")) {
-                caminhoDoBanco = "/" + caminhoDoBanco;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/criarBuild.fxml"));
+            Node formNode = loader.load();
+
+            CriarBuildController formController = loader.getController();
+
+            formController.carregarParaEdicao(this.build);
+
+            BorderPane mainPane = (BorderPane) rootPane.getScene().lookup("#mainPane");
+            if (mainPane != null) {
+                mainPane.setCenter(formNode);
+            } else {
+                System.out.println("Erro: Não foi possível encontrar o mainPane.");
             }
-            Image img = new Image(getClass().getResourceAsStream(caminhoDoBanco));
-            if (img.isError()) {
-                System.out.println("Erro ao carregar imagem: " + caminhoDoBanco);
-            }
-            return img;
-        } catch (Exception e) {
-            System.out.println("Erro ao carregar imagem: " + caminhoDoBanco);
+
+        } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
+    }
+
+    private Image carregarImagemSegura(String caminhoDoBanco) {
+        return utils.ImageUtils.carregarImagemSegura(getClass(), caminhoDoBanco);
     }
 }

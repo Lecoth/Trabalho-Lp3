@@ -132,7 +132,6 @@
     -fx-background-radius: 0;
 }
 
-/* Força o texto do cabeçalho a ser escuro e negrito */
 .menu-lateral .titled-pane > .title .text {
     -fx-fill: #333333;
     -fx-font-weight: bold;
@@ -162,7 +161,7 @@
 }
 
 .menu-button {
-    -fx-pref-width: 1000;
+    -fx-pref-width: 150;
     -fx-background-color: white; /* Fundo branco */
     -fx-background-radius: 0;
     -fx-border-color: transparent;

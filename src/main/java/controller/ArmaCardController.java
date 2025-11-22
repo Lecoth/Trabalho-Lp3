@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import model.Arma;
+import utils.ImageUtils;
 
 public class ArmaCardController {
     @FXML
@@ -28,23 +29,6 @@ public class ArmaCardController {
     }
 
     private Image carregarImagemSegura(String caminhoDoBanco) {
-        if (caminhoDoBanco == null || caminhoDoBanco.isEmpty()) {
-            System.out.println("Caminho de imagem vazio.");
-            return null;
-        }
-        try {
-            if (!caminhoDoBanco.startsWith("/")) {
-                caminhoDoBanco = "/" + caminhoDoBanco;
-            }
-            Image img = new Image(getClass().getResourceAsStream(caminhoDoBanco));
-            if (img.isError()) {
-                System.out.println("Erro ao carregar imagem: " + caminhoDoBanco);
-            }
-            return img;
-        } catch (Exception e) {
-            System.out.println("Erro ao carregar imagem: " + caminhoDoBanco);
-            e.printStackTrace();
-            return null;
-        }
+        return utils.ImageUtils.carregarImagemSegura(getClass(), caminhoDoBanco);
     }
 }

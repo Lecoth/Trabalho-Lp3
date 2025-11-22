@@ -9,6 +9,7 @@ public class BuildUserInfo {
     private Artefato artefato;
     private String nome_usuario;
     private String nome_build;
+    private String descricao;
     private boolean privada;
     private String sands_main;
     private String goblet_main;
@@ -68,6 +69,14 @@ public class BuildUserInfo {
 
     public void setNome_build(String nome_build) {
         this.nome_build = nome_build;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public boolean isPrivada() {

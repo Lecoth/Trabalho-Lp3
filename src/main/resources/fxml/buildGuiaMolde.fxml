@@ -6,7 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BuildCardController">
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<AnchorPane fx:id="rootPane" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BuildCardController">
     <children>
         <AnchorPane id="card" layoutX="14.0" layoutY="14.0" prefHeight="422.0" prefWidth="572.0" style="-fx-border-color: #AAAAAA; -fx-border-radius: 5; -fx-background-color: #FAFAFA;">
             <children>
@@ -48,6 +50,12 @@
 
                 <Text fx:id="txtSubstatusDesc" layoutX="225.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 14px;" text="Substats..." wrappingWidth="346.0" />
 
+                <HBox fx:id="adminBotoesHBox" layoutX="220.0" layoutY="385.0" spacing="10.0" visible="false" managed="false">
+                    <children>
+                        <Button fx:id="btnEditar" maxWidth="92.0" mnemonicParsing="false" onAction="#editarBuild" prefHeight="40.0" prefWidth="90.0" styleClass="menu-button" stylesheets="@../css/estilo.css" text="Editar" />
+                        <Button fx:id="btnDeletar" maxWidth="95.0" mnemonicParsing="false" onAction="#deletarBuild" prefHeight="40.0" prefWidth="93.0" styleClass="menu-button" stylesheets="@../css/estilo.css" text="Deletar" textFill="RED" />
+                    </children>
+                </HBox>
             </children>
         </AnchorPane>
     </children>

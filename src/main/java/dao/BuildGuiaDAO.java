@@ -171,4 +171,44 @@ public class BuildGuiaDAO {
             throw e;
         }
     }
+
+    public void deletarBuildGuia(int idBuildGuia) throws SQLException {
+        String sql = "DELETE FROM build_guia WHERE id_build_guia = ?";
+
+        try (Connection conn = Conexao.conectar()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idBuildGuia);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erro no BuildGuiaDAO ao DELETAR: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public void atualizarBuildGuia(BuildGuia build) throws SQLException {
+        String sql = "UPDATE build_guia SET id_personagem = ?, id_arma_ideal = ?, id_art_set = ?, " +
+                "pq_arma_ideal = ?, main_sands = ?, main_goblet = ?, main_circlet = ?, " +
+                "substats = ?, ideal_status = ? WHERE id_build_guia = ?";
+
+        try (Connection conn = Conexao.conectar()) {
+            if (conn == null) throw new SQLException("Erro de conexão.");
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, build.getPersonagem().getId_personagem());
+            stmt.setInt(2, build.getArma().getId_arma());
+            stmt.setInt(3, build.getArtefato().getId_artefato());
+            stmt.setString(4, build.getPq_arma_ideal());
+            stmt.setString(5, build.getMain_sands());
+            stmt.setString(6, build.getMain_goblet());
+            stmt.setString(7, build.getMain_circlet());
+            stmt.setString(8, build.getSubstatus());
+            stmt.setString(9, build.getIdeal_status());
+            stmt.setInt(10, build.getId_build_guia());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erro no BuildGuiaDAO ao ATUALIZAR: " + e.getMessage());
+            throw e;
+        }
+    }
 }

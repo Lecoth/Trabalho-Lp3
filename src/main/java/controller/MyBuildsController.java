@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import model.BuildUserInfo;
@@ -62,6 +63,7 @@ public class MyBuildsController {
                 Node cardNode = loader.load();
 
                 UserBuildCardController cardController = loader.getController();
+                cardController.setParentVBox(vboxConteudo);
                 cardController.setBuild(build);
 
                 vboxConteudo.getChildren().add(cardNode);

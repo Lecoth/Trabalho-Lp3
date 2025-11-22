@@ -33,7 +33,7 @@ public class BuildsGuiaController {
                 Node cardNode = loader.load();
 
                 BuildCardController cardController = loader.getController();
-
+                cardController.setParentVBox(vboxConteudo);
                 cardController.setBuild(build);
 
                 vboxConteudo.getChildren().add(cardNode);

@@ -45,6 +45,7 @@ public class AdminBuildGuiaController {
     private ArmaDAO armaDAO = new ArmaDAO();
     private ArtefatoDAO artefatoDAO = new ArtefatoDAO();
     private BuildGuiaDAO buildGuiaDAO = new BuildGuiaDAO();
+    private BuildGuia buildParaEditar;
 
     @FXML
     public void initialize() {
@@ -88,6 +89,28 @@ public class AdminBuildGuiaController {
         });
     }
 
+    public void carregarParaEdicao(BuildGuia build) {
+        this.buildParaEditar = build;
+        btnSalvar.setText("Atualizar Guia");
+
+        for (Personagem p : comboPersonagem.getItems()) {
+            if (p.getId_personagem() == build.getPersonagem().getId_personagem()) { comboPersonagem.setValue(p); break; }
+        }
+        for (Arma a : comboArma.getItems()) {
+            if (a.getId_arma() == build.getArma().getId_arma()) { comboArma.setValue(a); break; }
+        }
+        for (Artefato art : comboArtefato.getItems()) {
+            if (art.getId_artefato() == build.getArtefato().getId_artefato()) { comboArtefato.setValue(art); break; }
+        }
+
+        txtPqArmaIdeal.setText(build.getPq_arma_ideal());
+        txtMainSands.setText(build.getMain_sands());
+        txtMainGoblet.setText(build.getMain_goblet());
+        txtMainCirclet.setText(build.getMain_circlet());
+        txtSubstats.setText(build.getSubstatus());
+        txtIdealStatus.setText(build.getIdeal_status());
+    }
+
     @FXML
     void salvarBuildGuia(ActionEvent event) {
         try {
@@ -120,12 +143,17 @@ public class AdminBuildGuiaController {
             build.setSubstatus(substats);
             build.setIdeal_status(idealStatus);
 
-            buildGuiaDAO.inserirBuildGuia(build);
-
-            lblMensagem.setTextFill(javafx.scene.paint.Color.GREEN);
-            lblMensagem.setText("Build Guia para '" + p.getNome() + "' salva com sucesso!");
-
-            limparCampos();
+            if (buildParaEditar == null) {
+                buildGuiaDAO.inserirBuildGuia(build);
+                lblMensagem.setTextFill(javafx.scene.paint.Color.GREEN);
+                lblMensagem.setText("Build Guia Salva!");
+                limparCampos();
+            } else {
+                build.setId_build_guia(buildParaEditar.getId_build_guia());
+                buildGuiaDAO.atualizarBuildGuia(build);
+                lblMensagem.setTextFill(javafx.scene.paint.Color.GREEN);
+                lblMensagem.setText("Atualizado com sucesso!");
+            }
 
         } catch (SQLException e) {
             lblMensagem.setTextFill(javafx.scene.paint.Color.RED);

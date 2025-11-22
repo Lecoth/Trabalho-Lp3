@@ -19,8 +19,8 @@ public class BuildUsuarioDAO {
         // A tabela 'build_usuario' espera os ids, nome, etc.
         // A data_criacao é preenchida automaticamente pelo banco
         String sql = "INSERT INTO build_usuario (id_usuario, id_personagem, id_arma_usada, id_art_set, " +
-                "nome_build, privada, sands_main, goblet_main, circlet_main, data_criacao) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+                "nome_build, privada, sands_main, goblet_main, circlet_main, descricao, data_criacao) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
         try (Connection conn = Conexao.conectar()) {
             if (conn == null) {
@@ -38,6 +38,7 @@ public class BuildUsuarioDAO {
             stmt.setString(7, build.getSands_main());
             stmt.setString(8, build.getGoblet_main());
             stmt.setString(9, build.getCirclet_main());
+            stmt.setString(10, build.getDescricao());
 
             stmt.executeUpdate();
 
@@ -51,7 +52,7 @@ public class BuildUsuarioDAO {
         List<BuildUserInfo> builds = new ArrayList<>();
 
         String sql = "SELECT " +
-                "bu.id_build_user, bu.nome_build, bu.privada, bu.sands_main, bu.goblet_main, bu.circlet_main, " +
+                "bu.id_build_user, bu.nome_build, bu.privada, bu.sands_main, bu.goblet_main, bu.circlet_main, bu.descricao, " +
                 "u.idUser, u.nome AS nome_usuario, " +
                 "p.id_personagem, p.nome AS nome_personagem, p.elemento, p.imagem AS imagem_personagem, " +
                 "a.id_arma, a.nome AS nome_arma, a.imagem AS imagem_arma, " +
@@ -95,6 +96,7 @@ public class BuildUsuarioDAO {
                 build.setSands_main(rs.getString("sands_main"));
                 build.setGoblet_main(rs.getString("goblet_main"));
                 build.setCirclet_main(rs.getString("circlet_main"));
+                build.setDescricao(rs.getString("descricao"));
 
                 build.setPersonagem(p);
                 build.setArma(a);
@@ -113,7 +115,7 @@ public class BuildUsuarioDAO {
         List<BuildUserInfo> builds = new ArrayList<>();
 
         String sql = "SELECT " +
-                "bu.id_build_user, bu.nome_build, bu.privada, bu.sands_main, bu.goblet_main, bu.circlet_main, " +
+                "bu.id_build_user, bu.nome_build, bu.privada, bu.sands_main, bu.goblet_main, bu.circlet_main, bu.descricao, " +
                 "u.idUser, u.nome AS nome_usuario, " +
                 "p.id_personagem, p.nome AS nome_personagem, p.elemento, p.imagem AS imagem_personagem, " +
                 "a.id_arma, a.nome AS nome_arma, a.imagem AS imagem_arma, " +
@@ -157,6 +159,7 @@ public class BuildUsuarioDAO {
                 build.setSands_main(rs.getString("sands_main"));
                 build.setGoblet_main(rs.getString("goblet_main"));
                 build.setCirclet_main(rs.getString("circlet_main"));
+                build.setDescricao(rs.getString("descricao"));
 
                 build.setPersonagem(p);
                 build.setArma(a);
@@ -174,7 +177,7 @@ public class BuildUsuarioDAO {
     public List<BuildUserInfo> buscarBuildsPublicasPorNome(String nomeBuild) {
         List<BuildUserInfo> builds = new ArrayList<>();
         String sql = "SELECT " +
-                "bu.id_build_user, bu.nome_build, bu.privada, bu.sands_main, bu.goblet_main, bu.circlet_main, " +
+                "bu.id_build_user, bu.nome_build, bu.privada, bu.sands_main, bu.goblet_main, bu.circlet_main, bu.descricao, " +
                 "u.idUser, u.nome AS nome_usuario, " +
                 "p.id_personagem, p.nome AS nome_personagem, p.elemento, p.imagem AS imagem_personagem, " +
                 "a.id_arma, a.nome AS nome_arma, a.imagem AS imagem_arma, " +
@@ -218,6 +221,7 @@ public class BuildUsuarioDAO {
                 build.setSands_main(rs.getString("sands_main"));
                 build.setGoblet_main(rs.getString("goblet_main"));
                 build.setCirclet_main(rs.getString("circlet_main"));
+                build.setDescricao(rs.getString("descricao"));
 
                 build.setPersonagem(p);
                 build.setArma(a);
@@ -230,5 +234,51 @@ public class BuildUsuarioDAO {
             e.printStackTrace();
         }
         return builds;
+    }
+
+    public void deletarBuildUsuario(int idBuildUser) throws SQLException {
+        String sql = "DELETE FROM build_usuario WHERE id_build_user = ?";
+
+        try (Connection conn = Conexao.conectar()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idBuildUser);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erro no BuildUsuarioDAO ao DELETAR: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public void atualizarBuildUsuario(BuildUsuario build) throws SQLException {
+        String sql = "UPDATE build_usuario SET " +
+                "id_personagem = ?, " +
+                "id_arma_usada = ?, " +
+                "id_art_set = ?, " +
+                "nome_build = ?, " +
+                "privada = ?, " +
+                "sands_main = ?, " +
+                "goblet_main = ?, " +
+                "circlet_main = ?, " +
+                "descricao = ? " +
+                "WHERE id_build_user = ?";
+
+        try (Connection conn = Conexao.conectar()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, build.getId_personagem());
+            stmt.setInt(2, build.getId_arma_usada());
+            stmt.setInt(3, build.getId_art_set());
+            stmt.setString(4, build.getNome_build());
+            stmt.setBoolean(5, build.isPrivada());
+            stmt.setString(6, build.getSands_main());
+            stmt.setString(7, build.getGoblet_main());
+            stmt.setString(8, build.getCirclet_main());
+            stmt.setString(9, build.getDescricao());
+            stmt.setInt(10, build.getId_build_user());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erro no BuildUsuarioDAO ao ATUALIZAR: " + e.getMessage());
+            throw e;
+        }
     }
 }
