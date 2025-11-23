@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.BuildUserInfo;
+import utils.AlertUtils;
 import utils.ImageUtils;
 
 import java.io.IOException;
@@ -117,24 +118,27 @@ public class UserBuildCardController {
 
     @FXML
     void deletarBuild(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmar Exclusão");
-        alert.setHeaderText("Deletar Build: " + build.getNome_build());
-        alert.setContentText("Você tem certeza que quer deletar esta build? Esta ação não pode ser desfeita.");
-        javafx.stage.Stage stage = (javafx.stage.Stage) rootPane.getScene().getWindow();
-        alert.initOwner(stage);
+        boolean confirmou = AlertUtils.mostrarConfirmacao(
+                "Confirmar Exclusão",
+                "Deletar Build: " + build.getNome_build(),
+                "Esta ação não pode ser desfeita.",
+                rootPane.getScene().getWindow()
+        );
 
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if (result.isPresent() && result.get() == ButtonType.OK) {
+        if (confirmou) {
             try {
+                // Deleta do Banco de Dados
                 buildUsuarioDAO.deletarBuildUsuario(build.getId_build_user());
-                parentVBox.getChildren().remove(rootPane);
+
+                if (parentVBox != null) {
+                    parentVBox.getChildren().remove(rootPane);
+                }
+
+                AlertUtils.mostrarSucesso("Sucesso", "Build deletada com sucesso.");
+
             } catch (SQLException e) {
-                Alert erroAlert = new Alert(Alert.AlertType.ERROR);
-                erroAlert.setTitle("Erro de SQL");
-                erroAlert.setContentText("Não foi possível deletar a build: " + e.getMessage());
-                erroAlert.showAndWait();
+                AlertUtils.mostrarErro("Erro ao Deletar", null, e.getMessage());
+                e.printStackTrace();
             }
         }
     }

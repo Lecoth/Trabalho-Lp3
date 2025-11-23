@@ -32,6 +32,18 @@ public class UserBuildsController {
         preencherVBox(builds, "Nenhum resultado encontrado para sua busca.", "");
     }
 
+    public void exibirResultadosMistos(List<Node> cardsEncontrados) {
+        vboxConteudo.getChildren().clear();
+
+        if (cardsEncontrados.isEmpty()) {
+            Label lblAviso = new Label("Nenhum resultado encontrado.");
+            lblAviso.setFont(new Font(18.0));
+            vboxConteudo.getChildren().add(lblAviso);
+        } else {
+            vboxConteudo.getChildren().addAll(cardsEncontrados);
+        }
+    }
+
     // Privado para preencher o VBox e evitar duplicação de código
     private void preencherVBox(List<BuildUserInfo> builds, String msgVazio, String msgSubAviso) {
         vboxConteudo.getChildren().clear();

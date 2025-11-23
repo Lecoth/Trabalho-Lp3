@@ -45,6 +45,16 @@ public class MainController {
             adminPane.setVisible(true);
             adminPane.setManaged(true);
         }
+
+        txtPesquisa.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() >= 3 || newValue.isEmpty()) {
+                try {
+                    fazerPesquisa();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
     @FXML
     private void toggleMenu(ActionEvent event) {
@@ -68,38 +78,54 @@ public class MainController {
 
     private void fazerPesquisa() throws IOException {
         String termo = txtPesquisa.getText().trim();
+
+        // Se estiver vazio, volta para a Home
         if (termo.isEmpty()) {
-            carregarTela("home.fxml"); // Se a pesquisa for vazia, volta pra home
+            carregarTela("home.fxml");
             return;
         }
 
-        System.out.println("Pesquisando por: " + termo);
+        System.out.println("Pesquisando (Mista) por: " + termo);
 
-        BuildGuia buildGuiaEncontrada = buildGuiaDAO.buscarBuildGuiaPorPersonagem(termo);
+        java.util.List<Node> cardsEncontrados = new java.util.ArrayList<>();
 
-        if (buildGuiaEncontrada != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/buildGuiaMolde.fxml"));
-            Node buildView = loader.load();
-            BuildCardController cardController = loader.getController();
-            cardController.setBuild(buildGuiaEncontrada);
-            mainPane.setCenter(buildView);
+        List<BuildGuia> guias = buildGuiaDAO.buscarBuildGuiaPorPersonagem(termo);
 
-        } else {
-            List<BuildUserInfo> buildsUsuarioEncontradas = buildUsuarioDAO.buscarBuildsPublicasPorNome(termo);
+        if (guias != null) {
+            for (BuildGuia g : guias) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/buildGuiaMolde.fxml"));
+                Node cardGuia = loader.load();
+                BuildCardController controller = loader.getController();
+                controller.setBuild(g);
 
-            if (buildsUsuarioEncontradas != null && !buildsUsuarioEncontradas.isEmpty()) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/usersbuilds.fxml"));
-                Node node = loader.load();
-
-                UserBuildsController controller = loader.getController();
-                controller.carregarBuildsPesquisadas(buildsUsuarioEncontradas);
-
-                mainPane.setCenter(node);
-
-            } else {
-                System.out.println("Build não encontrada em Guias ou User Builds.");
-                carregarTela("naoEncontrado.fxml");
+                // Adiciona na lista de achados
+                cardsEncontrados.add(cardGuia);
             }
+        }
+
+        List<model.BuildUserInfo> userBuilds = buildUsuarioDAO.buscarBuildsPublicasPorNome(termo);
+
+        if (userBuilds != null) {
+            for (model.BuildUserInfo ub : userBuilds) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userBuildMolde.fxml"));
+                Node cardNode = loader.load();
+                UserBuildCardController controller = loader.getController();
+                controller.setMostrarAutor(true);
+                controller.setBuild(ub);
+                cardsEncontrados.add(cardNode);
+            }
+        }
+
+        if (cardsEncontrados.isEmpty()) {
+            carregarTela("naoEncontrado.fxml");
+        } else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/usersbuilds.fxml"));
+            Node listaNode = loader.load();
+
+            UserBuildsController listaController = loader.getController();
+            listaController.exibirResultadosMistos(cardsEncontrados);
+
+            mainPane.setCenter(listaNode);
         }
     }
 

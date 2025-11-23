@@ -10,14 +10,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.StringConverter;
 import model.*;
+import utils.AlertUtils;
+import utils.ComboBoxUtils;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class CriarBuildController {
 
-    @FXML
-    private Label lblTituloForm;
     @FXML
     private TextField txtNomeBuild;
     @FXML
@@ -56,7 +56,6 @@ public class CriarBuildController {
 
     public void carregarParaEdicao(BuildUserInfo build) {
         this.buildParaEditar = build;
-        //lblTituloForm.setText("Editar Build"); // Vou adicionar o lblTituloForm
         btnSalvar.setText("Atualizar Build");
 
         txtNomeBuild.setText(build.getNome_build());
@@ -104,8 +103,7 @@ public class CriarBuildController {
             String descricao = txtDescricao.getText();
 
             if (p == null || a == null || art == null || nomeBuild.isEmpty() || sands == null || goblet == null || circlet == null) {
-                lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
-                lblMensagem.setText("Erro: Preencha todos os campos obrigatórios.");
+                AlertUtils.mostrarErro("Atenção", null, "Preencha todos os campos obrigatórios.");
                 return;
             }
 
@@ -149,24 +147,14 @@ public class CriarBuildController {
     }
 
     private void carregarComboBoxes() {
-        List<Personagem> personagens = personagemDAO.buscarTodosPersonagens();
-        List<Arma> armas = armaDAO.buscarTodasArmas();
-        List<Artefato> artefatos = artefatoDAO.buscarTodosArtefatos();
-        comboPersonagem.getItems().setAll(personagens);
-        comboArma.getItems().setAll(armas);
-        comboArtefato.getItems().setAll(artefatos);
-        comboPersonagem.setConverter(new StringConverter<Personagem>() {
-            @Override public String toString(Personagem p) { return (p == null) ? null : p.getNome(); }
-            @Override public Personagem fromString(String s) { return null; }
-        });
-        comboArma.setConverter(new StringConverter<Arma>() {
-            @Override public String toString(Arma a) { return (a == null) ? null : a.getNome(); }
-            @Override public Arma fromString(String s) { return null; }
-        });
-        comboArtefato.setConverter(new StringConverter<Artefato>() {
-            @Override public String toString(Artefato art) { return (art == null) ? null : art.getNome_set(); }
-            @Override public Artefato fromString(String s) { return null; }
-        });
+        ComboBoxUtils.configurarComboBoxes(
+                comboPersonagem,
+                comboArma,
+                comboArtefato,
+                personagemDAO,
+                armaDAO,
+                artefatoDAO
+        );
     }
 
     private void limparCampos() {

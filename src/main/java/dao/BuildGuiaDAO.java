@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BuildGuiaDAO {
-    public BuildGuia buscarBuildGuiaPorPersonagem(String nomePersonagem) {
+    public List<BuildGuia> buscarBuildGuiaPorPersonagem(String nomePersonagem) {
+        List<BuildGuia> guiasEncontrados = new ArrayList<>();
+
         String sql = "SELECT " +
                 "p.id_personagem, p.nome AS nome_personagem, p.elemento, p.talentos, p.imagem AS imagem_personagem, " +
                 "a.id_arma, a.nome AS nome_arma, a.efeito, a.imagem AS imagem_arma, " +
@@ -21,19 +23,17 @@ public class BuildGuiaDAO {
                 "JOIN personagem p ON bg.id_personagem = p.id_personagem " +
                 "JOIN arma a ON bg.id_arma_ideal = a.id_arma " +
                 "JOIN artefato art ON bg.id_art_set = art.id_artefato " +
-                "WHERE UPPER(p.nome) = UPPER(?)"; // Busca pelo nome do personagem
+                "WHERE UPPER(p.nome) LIKE UPPER(?)";
 
         try (Connection conn = Conexao.conectar()) {
-            if (conn == null) {
-                System.out.println("Erro no DAO: Não foi possível conectar.");
-                return null;
-            }
+            if (conn == null) return guiasEncontrados;
 
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, nomePersonagem.toUpperCase());
+            stmt.setString(1, "%" + nomePersonagem + "%");
+
             ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 Personagem p = new Personagem();
                 Arma a = new Arma();
                 Artefato art = new Artefato();
@@ -67,7 +67,7 @@ public class BuildGuiaDAO {
                 build.setArma(a);
                 build.setArtefato(art);
 
-                return build;
+                guiasEncontrados.add(build);
             }
 
         } catch (Exception e) {
@@ -75,7 +75,7 @@ public class BuildGuiaDAO {
             e.printStackTrace();
         }
 
-        return null;
+        return guiasEncontrados;
     }
 
     public List<BuildGuia> buscarTodasBuildsGuia() {

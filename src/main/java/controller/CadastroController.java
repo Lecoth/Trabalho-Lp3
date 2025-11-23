@@ -6,6 +6,7 @@ import model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import utils.AlertUtils;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,8 +27,7 @@ public class CadastroController {
         String senha = txtSenha.getText();
 
         if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
-            lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
-            lblMensagem.setText("Erro: Todos os campos são obrigatórios!");
+            AlertUtils.mostrarErro("Erro", null, "Todos os campos são obrigatórios!");
             return;
         }
 
@@ -57,7 +57,7 @@ public class CadastroController {
             lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
 
             if (e.getMessage().contains("Duplicate entry")) {
-                lblMensagem.setText("Erro: Este e-mail já está cadastrado.");
+                AlertUtils.mostrarErro("Erro de Cadastro", null, "Este e-mail já está cadastrado.");
             } else {
                 lblMensagem.setText("Erro no banco de dados. Tente novamente.");
             }

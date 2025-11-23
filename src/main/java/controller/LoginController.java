@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import db.UserSessao;
+import utils.AlertUtils;
+
 import java.io.IOException;
 
 public class LoginController {
@@ -27,8 +29,7 @@ public class LoginController {
         String senha = txtSenha.getText();
 
         if (email.isEmpty() || senha.isEmpty()) {
-            lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
-            lblMensagem.setText("Erro: Email e senha são obrigatórios!");
+            AlertUtils.mostrarErro("Erro", null, "Email e senha são obrigatórios!");
             return;
         }
 
@@ -41,8 +42,7 @@ public class LoginController {
                 UserSessao.setUsuarioLogado(usuario);
                 abrirTelaPrincipal();
             } else {
-                lblMensagem.setTextFill(javafx.scene.paint.Color.RED);
-                lblMensagem.setText("Email ou senha incorretos.");
+                AlertUtils.mostrarErro("Falha no Login", null, "Email ou senha incorretos.");
             }
         } catch (Exception e) {
             lblMensagem.setTextFill(javafx.scene.paint.Color.RED);

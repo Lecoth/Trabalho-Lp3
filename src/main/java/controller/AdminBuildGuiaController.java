@@ -12,6 +12,7 @@ import model.Arma;
 import model.Artefato;
 import model.BuildGuia;
 import model.Personagem;
+import utils.ComboBoxUtils;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -53,40 +54,14 @@ public class AdminBuildGuiaController {
     }
 
     private void carregarComboBoxes() {
-        List<Personagem> personagens = personagemDAO.buscarTodosPersonagens();
-        List<Arma> armas = armaDAO.buscarTodasArmas();
-        List<Artefato> artefatos = artefatoDAO.buscarTodosArtefatos();
-
-        comboPersonagem.getItems().setAll(personagens);
-        comboArma.getItems().setAll(armas);
-        comboArtefato.getItems().setAll(artefatos);
-
-        comboPersonagem.setConverter(new StringConverter<Personagem>() {
-            @Override
-            public String toString(Personagem p) {
-                return (p == null) ? null : p.getNome();
-            }
-            @Override
-            public Personagem fromString(String string) { return null; }
-        });
-
-        comboArma.setConverter(new StringConverter<Arma>() {
-            @Override
-            public String toString(Arma a) {
-                return (a == null) ? null : a.getNome();
-            }
-            @Override
-            public Arma fromString(String string) { return null; }
-        });
-
-        comboArtefato.setConverter(new StringConverter<Artefato>() {
-            @Override
-            public String toString(Artefato art) {
-                return (art == null) ? null : art.getNome_set();
-            }
-            @Override
-            public Artefato fromString(String string) { return null; }
-        });
+        ComboBoxUtils.configurarComboBoxes(
+                comboPersonagem,
+                comboArma,
+                comboArtefato,
+                personagemDAO,
+                armaDAO,
+                artefatoDAO
+        );
     }
 
     public void carregarParaEdicao(BuildGuia build) {

@@ -63,4 +63,33 @@ public class ArmaDAO {
             throw e;
         }
     }
+
+    public List<Arma> buscarArmasPorTipo(String tipoArma) {
+        List<Arma> armas = new ArrayList<>();
+        String sql = "SELECT id_arma, nome, tipo_arma, estrelas, base_atk, sub_status, efeito, imagem FROM arma WHERE tipo_arma = ?";
+
+        try (Connection conn = Conexao.conectar()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, tipoArma);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Arma a = new Arma();
+                a.setId_arma(rs.getInt("id_arma"));
+                a.setNome(rs.getString("nome"));
+                a.setTipo_arma(rs.getString("tipo_arma"));
+                a.setEstrelas(rs.getInt("estrelas"));
+                a.setBase_atk(rs.getInt("base_atk"));
+                a.setSub_status(rs.getString("sub_status"));
+                a.setEfeito(rs.getString("efeito"));
+                a.setImagem(rs.getString("imagem"));
+
+                armas.add(a);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar armas por tipo: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return armas;
+    }
 }
