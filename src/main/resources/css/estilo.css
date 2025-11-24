@@ -178,3 +178,48 @@
     -fx-background-color: #f0f0f0;
     -fx-text-fill: #007bff;
 }
+
+/* Estilo para Perfil e Ajuda */
+.content-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-padding: 20;
+}
+
+/* Títulos de seção */
+.section-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2A4B7C;
+    -fx-padding: 0 0 10 0;
+}
+
+/* Labels de formulário */
+.field-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #555555;
+}
+
+.field-value {
+    -fx-font-size: 16px;
+    -fx-text-fill: #333333;
+    -fx-padding: 0 0 10 0;
+}
+
+/* Estilo para o ListView de builds */
+.build-list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #DDDDDD;
+    -fx-border-radius: 5;
+}
+.build-list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10;
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+}
+.build-list-view .list-cell:even {
+    -fx-background-color: #F9F9F9;
+}

@@ -1,28 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="230.0" prefWidth="560.0" styleClass="card-base" stylesheets="@../css/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArmaCardController">
+<AnchorPane fx:id="rootPane" prefWidth="560.0" styleClass="card-base" stylesheets="@../css/estilo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArmaCardController">
     <children>
-        <ImageView fx:id="imgArma" fitHeight="100.0" fitWidth="100.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+        <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </padding>
+            <children>
 
-        <Label fx:id="lblNomeArma" layoutX="140.0" layoutY="20.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Nome da Arma" />
+                <HBox spacing="15.0">
+                    <children>
+                        <ImageView fx:id="imgArma" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
 
-        <Label layoutX="140.0" layoutY="55.0" style="-fx-font-weight: bold;" text="Ataque Base:" />
-        <Text fx:id="txtAtk" layoutX="225.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" />
+                        <VBox spacing="5.0">
+                            <children>
+                                <Label fx:id="lblNomeArma" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Nome da Arma" />
 
-        <Label layoutX="140.0" layoutY="85.0" style="-fx-font-weight: bold;" text="Sub-Status:" />
-        <Text fx:id="txtDesc" layoutX="225.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Substatus" />
+                                <HBox spacing="5.0">
+                                    <Label style="-fx-font-weight: bold;" text="Ataque Base:" />
+                                    <Text fx:id="txtAtk" strokeType="OUTSIDE" strokeWidth="0.0" text="000" />
+                                </HBox>
 
-        <Label layoutX="20.0" layoutY="130.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2A4B7C;" text="Efeito da Arma:" />
+                                <HBox spacing="5.0">
+                                    <Label style="-fx-font-weight: bold;" text="Sub-Status:" />
+                                    <Text fx:id="txtDesc" strokeType="OUTSIDE" strokeWidth="0.0" text="Substatus" />
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
 
-        <Text fx:id="txtDescEfeito" layoutX="19.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição longa do efeito da arma..." wrappingWidth="532.0" />
+                <VBox spacing="5.0">
+                    <children>
+                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2A4B7C;" text="Efeito da Arma:" />
+                        <Text fx:id="txtDescEfeito" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição longa do efeito da arma..." wrappingWidth="520.0" />
+                    </children>
+                </VBox>
+
+                <Region VBox.vgrow="ALWAYS" />
+
+                <HBox fx:id="adminBotoesHBox" alignment="CENTER_RIGHT" managed="false" spacing="10.0" visible="false">
+                    <children>
+                        <Button fx:id="btnEditar" maxWidth="90.0" mnemonicParsing="false" onAction="#editarArma" prefHeight="35.0" prefWidth="90.0" styleClass="menu-button" text="Editar" />
+                        <Button fx:id="btnDeletar" maxWidth="93.0" mnemonicParsing="false" onAction="#deletarArma" prefHeight="35.0" prefWidth="90.0" styleClass="menu-button" text="Deletar" textFill="RED" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
     </children>
-    <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-    </padding>
 </AnchorPane>

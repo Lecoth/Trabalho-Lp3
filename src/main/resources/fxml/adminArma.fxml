@@ -42,8 +42,6 @@
                         <Label text="Efeito da Arma:" style="-fx-font-weight: bold;" />
                         <TextArea fx:id="txtEfeito" promptText="Descrição do efeito..." wrapText="true" />
 
-                        <Label fx:id="lblMensagem" style="-fx-font-weight: bold;" />
-
                         <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvarArma" styleClass="menu-button" text="Salvar Arma" />
                     </children>
                 </VBox>

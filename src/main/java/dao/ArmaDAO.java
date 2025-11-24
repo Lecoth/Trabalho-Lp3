@@ -92,4 +92,35 @@ public class ArmaDAO {
         }
         return armas;
     }
+
+    public void deletarArma(int idArma) throws SQLException {
+        String sql = "DELETE FROM arma WHERE id_arma = ?";
+        try (Connection conn = Conexao.conectar()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idArma);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar arma: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public void atualizarArma(Arma a) throws SQLException {
+        String sql = "UPDATE arma SET nome=?, tipo_arma=?, estrelas=?, base_atk=?, sub_status=?, efeito=?, imagem=? WHERE id_arma=?";
+        try (Connection conn = Conexao.conectar()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, a.getNome());
+            stmt.setString(2, a.getTipo_arma());
+            stmt.setInt(3, a.getEstrelas());
+            stmt.setInt(4, a.getBase_atk());
+            stmt.setString(5, a.getSub_status());
+            stmt.setString(6, a.getEfeito());
+            stmt.setString(7, a.getImagem());
+            stmt.setInt(8, a.getId_arma());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar arma: " + e.getMessage());
+            throw e;
+        }
+    }
 }

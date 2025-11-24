@@ -7,15 +7,12 @@ import dao.PersonagemDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.StringConverter;
 import model.Arma;
 import model.Artefato;
 import model.BuildGuia;
 import model.Personagem;
 import utils.ComboBoxUtils;
-
 import java.sql.SQLException;
-import java.util.List;
 
 public class AdminBuildGuiaController {
 

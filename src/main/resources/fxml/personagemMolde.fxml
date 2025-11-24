@@ -5,13 +5,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="301.0" prefWidth="183.0" style="-fx-border-color: #AAAAAA; -fx-background-color: #FAFAFA; -fx-border-radius: 5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PersonagemCardController">
+<AnchorPane fx:id="rootPane" prefHeight="340.0" prefWidth="183.0" style="-fx-border-color: #AAAAAA; -fx-background-color: #FAFAFA; -fx-border-radius: 5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PersonagemCardController">
     <children>
-        <ImageView fx:id="imgPersonagem" fitHeight="260.0" fitWidth="177.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
-        <Label fx:id="lblNomePersonagem" alignment="CENTER" layoutY="269.0" style="-fx-font-weight: bold;" text="Nome" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-        <Label fx:id="lblElemento" alignment="CENTER" layoutY="285.0" text="Elemento" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font></Label>
+        <ImageView fx:id="imgPersonagem" fitHeight="260.0" fitWidth="177.0" layoutY="3.0" pickOnBounds="true" preserveRatio="false" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0" />
+
+        <Label fx:id="lblNomePersonagem" alignment="CENTER" layoutY="265.0" style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Nome" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+
+        <Label fx:id="lblElemento" alignment="CENTER" layoutY="285.0" style="-fx-text-fill: #555;" text="Elemento" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Label>
+
+        <Label fx:id="lblArma" alignment="CENTER" layoutY="302.0" style="-fx-text-fill: #777;" text="Tipo de Arma" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <font>
+                <Font size="11.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="lblEstrelas" alignment="CENTER" layoutY="318.0" style="-fx-text-fill: #FFD700; -fx-font-weight: bold;" text="⭐⭐⭐⭐⭐" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Label>
     </children>
 </AnchorPane>

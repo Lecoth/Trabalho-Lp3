@@ -14,7 +14,7 @@ public class PersonagemDAO {
 
     public List<Personagem> buscarTodosPersonagens() {
         List<Personagem> personagens = new ArrayList<>();
-        String sql = "SELECT id_personagem, nome, imagem, elemento, tipo_arma FROM personagem";
+        String sql = "SELECT id_personagem, nome, imagem, elemento, tipo_arma, estrelas FROM personagem";
 
         try (Connection conn = Conexao.conectar()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -27,6 +27,7 @@ public class PersonagemDAO {
                 p.setImagem(rs.getString("imagem"));
                 p.setElemento(rs.getString("elemento"));
                 p.setTipo_arma(rs.getString("tipo_arma"));
+                p.setEstrelas(rs.getInt("estrelas"));
 
                 personagens.add(p);
             }

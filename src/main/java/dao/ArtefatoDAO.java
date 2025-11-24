@@ -1,6 +1,7 @@
 package dao;
 
 import db.Conexao;
+import model.Arma;
 import model.Artefato;
 
 import java.sql.Connection;
@@ -55,6 +56,35 @@ public class ArtefatoDAO {
 
         } catch (SQLException e) {
             System.out.println("Erro no ArtefatoDAO ao inserir: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public void deletarArtefato(int idArtefato) throws SQLException {
+        String sql = "DELETE FROM artefato WHERE id_artefato = ?";
+        try (Connection conn = Conexao.conectar()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idArtefato);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar artefato: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public void atualizarArtefato(Artefato a) throws SQLException {
+        String sql = "UPDATE artefato SET nome_set=?, efeito_2pecas=?, efeito_4pecas=?, estrelas=?, imagem=? WHERE id_artefato=?";
+        try (Connection conn = Conexao.conectar()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, a.getNome_set());
+            stmt.setString(2, a.getEfeito_2pecas());
+            stmt.setString(3, a.getEfeito_4pecas());
+            stmt.setInt(4, a.getEstrelas());
+            stmt.setString(5, a.getImagem());
+            stmt.setInt(6, a.getId_artefato());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar artefato: " + e.getMessage());
             throw e;
         }
     }

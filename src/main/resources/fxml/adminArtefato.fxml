@@ -36,8 +36,6 @@
                         <Label text="Efeito de 4 peças:" style="-fx-font-weight: bold;" />
                         <TextArea fx:id="txt4pecas" promptText="Descrição do efeito..." wrapText="true" />
 
-                        <Label fx:id="lblMensagem" style="-fx-font-weight: bold;" />
-
                         <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvarArtefato" styleClass="menu-button" text="Salvar Artefato" />
                     </children>
                 </VBox>

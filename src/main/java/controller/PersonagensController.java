@@ -4,7 +4,7 @@ import dao.PersonagemDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.FlowPane;
 import model.Personagem;
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.util.List;
 public class PersonagensController {
 
     @FXML
-    private VBox vboxConteudo;
+    private FlowPane flowConteudo;
 
     private PersonagemDAO personagemDAO = new PersonagemDAO();
 
@@ -25,7 +25,7 @@ public class PersonagensController {
     private void carregarPersonagens() {
         List<Personagem> listaDePersonagens = personagemDAO.buscarTodosPersonagens();
 
-        vboxConteudo.getChildren().clear();
+        flowConteudo.getChildren().clear();
 
         for (Personagem p : listaDePersonagens) {
             try {
@@ -36,7 +36,7 @@ public class PersonagensController {
 
                 cardController.setPersonagem(p);
 
-                vboxConteudo.getChildren().add(cardNode);
+                flowConteudo.getChildren().add(cardNode);
 
             } catch (IOException e) {
                 e.printStackTrace();
