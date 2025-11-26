@@ -14,7 +14,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.BuildGuia;
-import model.BuildUserInfo;
 import model.Usuario;
 import dao.BuildUsuarioDAO;
 
@@ -84,8 +83,6 @@ public class MainController {
             carregarTela("home.fxml");
             return;
         }
-
-        System.out.println("Pesquisando (Mista) por: " + termo);
 
         java.util.List<Node> cardsEncontrados = new java.util.ArrayList<>();
 

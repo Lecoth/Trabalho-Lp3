@@ -1,6 +1,7 @@
 package controller;
 
 import dao.BuildGuiaDAO;
+import dao.FavoritoDAO;
 import db.UserSessao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.BuildGuia;
 import model.Usuario;
+import utils.AlertUtils;
 import utils.ImageUtils;
 
 import java.io.IOException;
@@ -31,10 +32,12 @@ public class BuildCardController {
     @FXML private ImageView imgPersonagem, imgArma, imgArtefato;
     @FXML private Label lblNomePersonagem, lblElemento, lblNomeArma, lblNomeArtefato;
     @FXML private Text txtSand, txtGoblet, txtCirclet, txtSubstatusDesc;
-    @FXML private HBox adminBotoesHBox; // Botões de admin
+    @FXML private HBox adminBotoesHBox;
+    @FXML private Button btnFavoritar;
 
     private BuildGuia build;
     private BuildGuiaDAO buildGuiaDAO = new BuildGuiaDAO();
+    private FavoritoDAO favoritoDAO = new FavoritoDAO();
     private VBox parentVBox;
 
     public void setBuild(BuildGuia build) {
@@ -62,6 +65,18 @@ public class BuildCardController {
         } else {
             adminBotoesHBox.setVisible(false);
             adminBotoesHBox.setManaged(false);
+        }
+
+        u = UserSessao.getUsuarioLogado();
+        if (u != null) {
+
+            if (favoritoDAO.isFavorito(u.getIdUser(), build.getId_build_guia(), null)) {
+                btnFavoritar.setText("★ Favorito");
+                btnFavoritar.setStyle("-fx-background-color: #FFD700;");
+            } else {
+                btnFavoritar.setText("☆ Favoritar");
+                btnFavoritar.setStyle("");
+            }
         }
     }
 
@@ -101,6 +116,27 @@ public class BuildCardController {
             if (mainPane != null) mainPane.setCenter(formNode);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void toggleFavorito(ActionEvent event) {
+        Usuario u = UserSessao.getUsuarioLogado();
+        if (u == null) return;
+
+        try {
+            if (btnFavoritar.getText().contains("Favorito")) {
+                favoritoDAO.removerFavorito(u.getIdUser(), build.getId_build_guia(), null);
+                btnFavoritar.setText("☆ Favoritar");
+                btnFavoritar.setStyle("");
+            } else {
+                favoritoDAO.adicionarFavorito(u.getIdUser(), build.getId_build_guia(), null);
+                btnFavoritar.setText("★ Favorito");
+                btnFavoritar.setStyle("-fx-background-color: #FFD700;");
+                AlertUtils.mostrarSucesso("Adicionado", "Build adicionada aos favoritos!");
+            }
+        } catch (SQLException e) {
+            AlertUtils.mostrarErro("Erro", null, e.getMessage());
         }
     }
 }

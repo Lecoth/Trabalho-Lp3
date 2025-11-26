@@ -281,4 +281,65 @@ public class BuildUsuarioDAO {
             throw e;
         }
     }
+
+    public model.BuildUserInfo buscarPorId(int id) {
+        String sql = "SELECT " +
+                "bu.id_build_user, bu.nome_build, bu.privada, bu.sands_main, bu.goblet_main, bu.circlet_main, bu.descricao, " +
+                "u.idUser, u.nome AS nome_usuario, " +
+                "p.id_personagem, p.nome AS nome_personagem, p.elemento, p.imagem AS imagem_personagem, " +
+                "a.id_arma, a.nome AS nome_arma, a.imagem AS imagem_arma, " +
+                "art.id_artefato, art.nome_set, art.imagem AS imagem_artefato " +
+                "FROM build_usuario bu " +
+                "JOIN usuarios u ON bu.id_usuario = u.idUser " +
+                "JOIN personagem p ON bu.id_personagem = p.id_personagem " +
+                "JOIN arma a ON bu.id_arma_usada = a.id_arma " +
+                "JOIN artefato art ON bu.id_art_set = art.id_artefato " +
+                "WHERE bu.id_build_user = ?";
+
+        try (Connection conn = Conexao.conectar()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                model.BuildUserInfo build = new model.BuildUserInfo();
+                model.Personagem p = new model.Personagem();
+                model.Arma a = new model.Arma();
+                model.Artefato art = new model.Artefato();
+
+                p.setId_personagem(rs.getInt("id_personagem"));
+                p.setNome(rs.getString("nome_personagem"));
+                p.setElemento(rs.getString("elemento"));
+                p.setImagem(rs.getString("imagem_personagem"));
+
+                a.setId_arma(rs.getInt("id_arma"));
+                a.setNome(rs.getString("nome_arma"));
+                a.setImagem(rs.getString("imagem_arma"));
+
+                art.setId_artefato(rs.getInt("id_artefato"));
+                art.setNome_set(rs.getString("nome_set"));
+                art.setImagem(rs.getString("imagem_artefato"));
+
+                build.setId_build_user(rs.getInt("id_build_user"));
+                build.setId_usuario(rs.getInt("idUser"));
+                build.setNome_usuario(rs.getString("nome_usuario"));
+                build.setNome_build(rs.getString("nome_build"));
+                build.setPrivada(rs.getBoolean("privada"));
+                build.setSands_main(rs.getString("sands_main"));
+                build.setGoblet_main(rs.getString("goblet_main"));
+                build.setCirclet_main(rs.getString("circlet_main"));
+                build.setDescricao(rs.getString("descricao"));
+
+                build.setPersonagem(p);
+                build.setArma(a);
+                build.setArtefato(art);
+
+                return build;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar BuildUsuario por ID: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

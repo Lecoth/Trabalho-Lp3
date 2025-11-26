@@ -2,15 +2,41 @@
 
 Este é um sistema de gerenciamento de builds para o jogo Genshin Impact, desenvolvido para a disciplina de Linguagem de Programação III.
 
-## Funcionalidades implementadas para a P1:
+## Funcionalidades implementadas:
 
-* Cadastro e Login de Usuários.
+* Cadastro e Login de Usuários com autentificação.
 * Tela principal com menu de navegação.
 * Visualização da Home com descrição do projeto.
 * Visualização do Perfil do usuário logado.
 * Listagem e visualização de Builds Guia (do site).
+* Listagem e visualização de Builds de Usuários.
 * Listagem e visualização de Personagens, Armas e Artefatos cadastrados.
-* Fluxo inicial para criação de Builds de Usuário (formulário estático).
+* Controle de Acesso: Diferenciação entre usuários comuns e Administradores
+* Painel Administrativo: Cadastro, edição e exclusão de Personagens, Armas, Artefatos e Builds Guia (CRUD completo).
+* Gerenciamento de Builds de Usuário:
+Criação de builds personalizadas com seleção de equipamentos e status.
+Opção de privacidade (Builds Públicas vs. Privadas).
+Edição e exclusão das próprias builds.
+* Sistema de Busca: Pesquisa global por nome de personagem ou título de build na tela principal (quando digita três letras já começa a pesuisar a build).
+* Sistema de Favoritos: Usuários podem favoritar builds (Guia ou de Usuários) para acesso rápido no perfil (tendo no máximo 4 builds favoritadas).
+
+## Usuários para Teste (Já incluídos no database.sql)
+
+* **Administrador:**
+    * Email: `lele@gmail.com`
+    * Senha: `senha`
+    * *Acesso total ao painel de cadastro de itens do jogo.*
+
+* **Usuário Comum:**
+    * Email: `le23@gmail.com`
+    * Senha: `123`
+    * *Pode criar builds, favoritar e visualizar guias.*
+
+## Problemas Comuns e Soluções
+
+### Erro no `module-info.java` (Duplicação de Requires)
+Se ao rodar o projeto aparecer um erro relacionado ao `module-info.java` exigindo o próprio módulo, verifique se há uma linha duplicada como `requires com.example.trabalholp3;`.
+* **Solução:** Apague essa linha manualmente no arquivo `src/main/java/module-info.java` e recarregue o Maven. Isso é um bug conhecido de importação automática em algumas IDEs.
 
 ## Como Configurar e Executar
 

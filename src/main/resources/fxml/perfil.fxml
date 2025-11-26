@@ -51,6 +51,13 @@
                         <Label fx:id="lblSemBuilds" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Você ainda não criou nenhuma build." textFill="#777777" visible="false" managed="false" />
                     </children>
                 </VBox>
+
+                <VBox maxWidth="600.0" spacing="10.0" styleClass="content-card">
+                    <children>
+                        <Label styleClass="section-title" text="Meus Favoritos (Máx 4)" />
+                        <ListView fx:id="listFavoritos" prefHeight="150.0" styleClass="build-list-view" />
+                    </children>
+                </VBox>
             </children>
         </VBox>
     </content>

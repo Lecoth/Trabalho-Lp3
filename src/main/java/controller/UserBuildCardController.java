@@ -1,6 +1,8 @@
 package controller;
 
 import dao.BuildUsuarioDAO;
+import dao.FavoritoDAO;
+import db.UserSessao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.BuildUserInfo;
+import model.Usuario;
 import utils.AlertUtils;
 import utils.ImageUtils;
 
@@ -23,43 +26,28 @@ import java.util.Optional;
 
 public class UserBuildCardController {
 
-    @FXML
-    private AnchorPane rootPane;
-    @FXML
-    private ImageView imgPersonagem;
-    @FXML
-    private ImageView imgArma;
-    @FXML
-    private ImageView imgArtefato;
-    @FXML
-    private Label lblNomeBuild;
-    @FXML
-    private Label lblNomePersonagem;
-    @FXML
-    private Label lblElemento;
-    @FXML
-    private Label lblNomeArma;
-    @FXML
-    private Label lblNomeArtefato;
-    @FXML
-    private Text txtSand;
-    @FXML
-    private Text txtGoblet;
-    @FXML
-    private Text txtCirclet;
-    @FXML
-    private Label lblStatusPrivacidade;
-    @FXML
-    private Label lblAutor;
-    @FXML
-    private Button btnEditar, btnDeletar;
-    @FXML
-    private HBox botoesHBox;
-    @FXML
-    private TextArea txtDescricao;
+    @FXML private AnchorPane rootPane;
+    @FXML private ImageView imgPersonagem;
+    @FXML private ImageView imgArma;
+    @FXML private ImageView imgArtefato;
+    @FXML private Label lblNomeBuild;
+    @FXML private Label lblNomePersonagem;
+    @FXML private Label lblElemento;
+    @FXML private Label lblNomeArma;
+    @FXML private Label lblNomeArtefato;
+    @FXML private Text txtSand;
+    @FXML private Text txtGoblet;
+    @FXML private Text txtCirclet;
+    @FXML private Label lblStatusPrivacidade;
+    @FXML private Label lblAutor;
+    @FXML private Button btnEditar, btnDeletar;
+    @FXML private HBox botoesHBox;
+    @FXML private TextArea txtDescricao;
+    @FXML private Button btnFavoritar;
 
     private BuildUserInfo build;
     private BuildUsuarioDAO buildUsuarioDAO = new BuildUsuarioDAO();
+    private FavoritoDAO favoritoDAO = new FavoritoDAO();
     private VBox parentVBox;
     private boolean mostrarAutor = false;
 
@@ -105,6 +93,38 @@ public class UserBuildCardController {
             txtDescricao.setText(build.getDescricao());
         } else {
             txtDescricao.setText("Sem descrição.");
+        }
+
+        Usuario u = UserSessao.getUsuarioLogado();
+
+        if (u != null && build.getId_usuario() == u.getIdUser()) {
+            btnFavoritar.setVisible(false);
+            btnFavoritar.setManaged(false);
+        }
+        else if (u != null) {
+            btnFavoritar.setVisible(true);
+            btnFavoritar.setManaged(true);
+
+            if (favoritoDAO.isFavorito(u.getIdUser(), null, build.getId_build_user())) {
+                btnFavoritar.setText("★ Favorito");
+                btnFavoritar.setStyle("-fx-background-color: #FFD700;");
+            } else {
+                btnFavoritar.setText("☆ Favoritar");
+                btnFavoritar.setStyle("");
+            }
+        } else {
+            btnFavoritar.setText("☆ Favoritar");
+            btnFavoritar.setStyle("");
+        }
+
+        if (u != null) {
+            if (favoritoDAO.isFavorito(u.getIdUser(), null, build.getId_build_user())) {
+                btnFavoritar.setText("★ Favorito");
+                btnFavoritar.setStyle("-fx-background-color: #FFD700;");
+            } else {
+                btnFavoritar.setText("☆ Favoritar");
+                btnFavoritar.setStyle("");
+            }
         }
     }
 
@@ -167,5 +187,28 @@ public class UserBuildCardController {
 
     private Image carregarImagemSegura(String caminhoDoBanco) {
         return utils.ImageUtils.carregarImagemSegura(getClass(), caminhoDoBanco);
+    }
+
+    @FXML
+    void toggleFavorito(ActionEvent event) {
+        Usuario u = UserSessao.getUsuarioLogado();
+        if (u == null) {
+            AlertUtils.mostrarErro("Login necessário", null, "Faça login para favoritar.");
+            return;
+        }
+        try {
+            if (btnFavoritar.getText().contains("★")) {
+                favoritoDAO.removerFavorito(u.getIdUser(), null, build.getId_build_user());
+                btnFavoritar.setText("☆ Favoritar");
+                btnFavoritar.setStyle("");
+            } else {
+                favoritoDAO.adicionarFavorito(u.getIdUser(), null, build.getId_build_user());
+                btnFavoritar.setText("★ Favorito");
+                btnFavoritar.setStyle("-fx-background-color: #FFD700;");
+                AlertUtils.mostrarSucesso("Salvo", "Adicionado aos favoritos!");
+            }
+        } catch (SQLException e) {
+            AlertUtils.mostrarErro("Erro", null, e.getMessage());
+        }
     }
 }

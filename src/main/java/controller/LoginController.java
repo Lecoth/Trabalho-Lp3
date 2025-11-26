@@ -1,6 +1,7 @@
 package controller;
 
 import dao.UsuarioDAO;
+import javafx.scene.input.KeyCode;
 import model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +23,21 @@ public class LoginController {
     private Label lblMensagem;
 
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+    @FXML
+    public void initialize() {
+        txtSenha.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                entrar(null);
+            }
+        });
+
+        txtEmail.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                entrar(null);
+            }
+        });
+    }
 
     @FXML
     public void entrar(ActionEvent event) {

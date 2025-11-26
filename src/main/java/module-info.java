@@ -10,5 +10,6 @@ module com.example.trabalholp3 {
     opens trabalholp3 to javafx.fxml;
     exports trabalholp3;
     exports controller;
+    exports model;
     opens controller to javafx.fxml;
 }
